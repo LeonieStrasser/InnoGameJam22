@@ -76,6 +76,11 @@ public class TrackPointEditor : UnityEditor.Editor
 {
     public override void OnInspectorGUI()
     {
+        if (GUILayout.Button("Draw Track Network"))
+        {
+            foreach (var trackPoint in FindObjectsOfType<TrackPoint>())
+                trackPoint.DrawLineToNeighbors(10f);
+        }
         if (GUILayout.Button("Add missing Neighbors"))
         {
             foreach (var trackPoint in FindObjectsOfType<TrackPoint>())

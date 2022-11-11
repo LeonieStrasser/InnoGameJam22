@@ -8,3 +8,11 @@ public class TrackGate : TrackPoint
 
 
 }
+
+/// <summary>
+/// provides Button to clear all stored data
+/// </summary>
+[UnityEditor.CustomEditor(typeof(TrackGate))]
+public class TrackGateEditor : TrackPointEditor
+{
+}
