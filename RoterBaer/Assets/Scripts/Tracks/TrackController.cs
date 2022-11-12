@@ -22,6 +22,9 @@ public class TrackController : MonoBehaviour
             Debug.LogError($"[{GetType().Name}] More than one Controller active!");
 
         Active = this;
+
+        if (StartPoint == null || EndPoint == null)
+            Debug.LogError($"[{GetType().Name}] {gameObject.name} is incompletely set up.", this);
     }
 
     private void Start()

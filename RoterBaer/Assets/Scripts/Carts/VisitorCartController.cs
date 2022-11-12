@@ -12,6 +12,8 @@ public class VisitorCartController : MonoBehaviour
 
     [SerializeField] float timeBetweenCarts = 5f;
 
+    [SerializeField, Min(1)] int cartLimit = 10;
+
     float elapsed = 0;
     private void Awake()
     {
@@ -33,10 +35,14 @@ public class VisitorCartController : MonoBehaviour
 
     public void SpawnCart()
     {
+        if (activeCarts.Count >= cartLimit) return;
+
         VisitorCart newCart = Instantiate(prefabVisitorCart, TrackController.Active.StartPoint.Position, Quaternion.identity);
 
         newCart.transform.SetParent(transform);
         newCart.StartRunning(TrackController.Active.StartPoint);
+
+        activeCarts.Add(newCart);
     }
 
     public void ReachedEnd(VisitorCart arrivingCart)
@@ -44,6 +50,7 @@ public class VisitorCartController : MonoBehaviour
         if (arrivingCart.TargetTrackPoint != TrackController.Active.EndPoint)
             Debug.LogWarning($"[{GetType().Name}] Cart {arrivingCart.gameObject.name} didn't arrive at expected End: {arrivingCart.TargetTrackPoint}", arrivingCart);
 
+        activeCarts.Remove(arrivingCart);
         Destroy(arrivingCart.gameObject);
     }
 }

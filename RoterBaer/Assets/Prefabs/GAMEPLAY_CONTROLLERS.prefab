@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabVisitorCart: {fileID: 1907333710165667486, guid: b4b5ce9eddaa1fb4980e74e83e02440b, type: 3}
-  timeBetweenCarts: 5
+  timeBetweenCarts: 1
+  cartLimit: 10
 --- !u!1 &4632360300391378585
 GameObject:
   m_ObjectHideFlags: 0
