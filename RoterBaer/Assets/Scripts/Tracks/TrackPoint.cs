@@ -7,9 +7,9 @@ public class TrackPoint : MonoBehaviour
 {
     int identifier;
 
-    [SerializeField] List<TrackPoint> neighbors = new List<TrackPoint>();
+    [SerializeField] protected List<TrackPoint> neighbors = new List<TrackPoint>();
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         if (neighbors.Where((x) => x != null).Count() < 2)
             Debug.LogError($"[{GetType().Name}] Track point '{name}' is missing neighbors!", this);
@@ -27,6 +27,31 @@ public class TrackPoint : MonoBehaviour
         }
     }
 
+    public virtual TrackPoint GetNextNode(TrackPoint previousPoint)
+    {
+        if (IsValidPreviousPoint(previousPoint))
+        {
+            foreach (var point in neighbors)
+            {
+                if (point != previousPoint) return point;
+            }
+        }
+
+        return previousPoint;
+    }
+
+    protected bool IsValidPreviousPoint(TrackPoint previousPoint)
+    {
+        if (!IsNeighbor(previousPoint))
+        {
+            Debug.LogError($"[{GetType().Name}] Unexpected Next Point request for '{this.gameObject.name}' with '{previousPoint.gameObject.name}' as orgin.", previousPoint);
+            return false;
+        }
+        return true;
+    }
+
+    public bool IsNeighbor(TrackPoint point) => neighbors.Contains(point);
+
     public void AddMissingNeighbors()
     {
         foreach (var trackPoint in neighbors)
@@ -38,8 +63,6 @@ public class TrackPoint : MonoBehaviour
         foreach (var trackPoint in neighbors.Where((x) => !x.IsNeighbor(this)))
             trackPoint.RemoveNeighbor(this);
     }
-
-    public bool IsNeighbor(TrackPoint point) => neighbors.Contains(point);
 
     public void AddNeighbor(TrackPoint point)
     {
