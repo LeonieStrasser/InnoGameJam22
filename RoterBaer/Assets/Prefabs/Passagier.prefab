@@ -4868,9 +4868,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passengerType: 0
-  standardScariness: 0.77
+  standardScariness: 0.2
   scarinessOfMonsters: []
   imageAnim: {fileID: 5455456754152669675}
+  endOfBoredLevel: 0.1
+  littleScaredLevel: 0.5
+  scaredLevel: 0.7
+  zzzVfx: {fileID: 1808948267}
 --- !u!1 &1996047120370618722
 GameObject:
   m_ObjectHideFlags: 0
