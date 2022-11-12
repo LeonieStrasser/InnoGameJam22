@@ -12,6 +12,7 @@ public class Passenger : MonoBehaviour
     }
 
     [SerializeField] EPassengerType passengerType;
+    public EPassengerType PassengerType => passengerType;
 
     [Header("Scare Values")]
     [SerializeField] [Range(0.01f, 1f)] float standardScariness;

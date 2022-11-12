@@ -8,11 +8,11 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance = null;
 
-    private FMOD.Studio.EventInstance MusicInstance;
-    private FMOD.Studio.EventInstance AmbientInstance;
-    private FMOD.Studio.Bus EnvEmittersBus;
-    private FMOD.Studio.Bus MusicBus;
-    private FMOD.Studio.Bus SFXBus;
+    private EventInstance MusicInstance;
+    private EventInstance AmbientInstance;
+    private Bus EnvEmittersBus;
+    private Bus MusicBus;
+    private Bus SFXBus;
 
     Dictionary<GameObject, EventInstance> wagonToEventInstance = new Dictionary<GameObject, EventInstance>();
 
@@ -33,44 +33,55 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        EnvEmittersBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX/EnvEmitterBus");
+        EnvEmittersBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus/EnvEmitterBus");
         MusicBus = FMODUnity.RuntimeManager.GetBus("bus:/MusicBus");
         SFXBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
 
-        MusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/2D/Music");
-        AmbientInstance = FMODUnity.RuntimeManager.CreateInstance("event:/2D/Ambient");
+        MusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Music");
+        AmbientInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Ambient");
 
-        //AmbientStart();
-        //MusicStart();
+    }
+    public void SwitchAuto(Vector3 OneShotPosition)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/SwitchAuto", OneShotPosition);
+    }
+    public void SwitchPlayer(Vector3 OneShotPosition)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/SwitchPlayer", OneShotPosition);
+    }
+    public void WagonPassesSwitch(Vector3 OneShotPosition)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/WagonPassesSwitch", OneShotPosition);
     }
 
-    public void Button_Click()
+    public void MenuButtonAccept()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Button_Click");        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/MenuButtonAccept");        
     }
 
-    public void Button_Hover()
+    public void MenuButtonBack()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Button_Hover");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/MenuButtonBack()");
     }
 
-    public void Button_Cancel()
+    public void PointsPositive()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Button_Cancel");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsPositive");
+    }
+    public void PointsNegative()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsNegative");
     }
 
 
-    // Environment Emitters ------------------------------------------------------------------
-
-
-    public void WagonInitialize(GameObject FlyingCar)
+    public void WagonInitialize(GameObject Wagon)
     {
-        FMOD.Studio.EventInstance FlyingCarInstance = FMODUnity.RuntimeManager.CreateInstance("event:/3D/Flying_Car");
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(FlyingCarInstance, FlyingCar.transform, FlyingCar.GetComponent<Rigidbody>());
-        FlyingCarInstance.start();
-        FlyingCarInstance.release();
+        EventInstance WagonInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/WagonRoll");
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(WagonInstance, Wagon.transform, Wagon.GetComponent<Rigidbody>());
+        WagonInstance.start();
+        
 
-        wagonToEventInstance.Add(FlyingCar, FlyingCarInstance);
+        wagonToEventInstance.Add(Wagon, WagonInstance);
     }
 
     public void WagonReachedTrackSwitch(VisitorCart cart)
@@ -79,23 +90,25 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void WagonRetirement(GameObject FlyingCar)
+    public void WagonRetirement(GameObject Wagon)
     {
-        if (!wagonToEventInstance.ContainsKey(FlyingCar))
+        if (!wagonToEventInstance.ContainsKey(Wagon))
         {
-            Debug.LogWarning($"[AudioManager] Requested Retirement of unknown car {FlyingCar.gameObject.name}", FlyingCar);
+            Debug.LogError($"Requested Retirement of unknown wagon {Wagon.gameObject.name}", Wagon);
             return;
         }
-
-        wagonToEventInstance.Remove(FlyingCar);
-
-        wagonToEventInstance[FlyingCar].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        
+        wagonToEventInstance[Wagon].release();
+        wagonToEventInstance[Wagon].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        
+        wagonToEventInstance.Remove(Wagon);
     }
 
     public void StopAllEnvEmitters()
     {
         //Stops all instances of Enviromental Emitters
         EnvEmittersBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        wagonToEventInstance.Clear();
     }
 
     public void PauseMenu()
@@ -107,43 +120,34 @@ public class AudioManager : MonoBehaviour
         EnvEmittersBus.setPaused(false);
     }
 
-    /*
-    public void BallRollingSpeedUpdate(float BallSpeed)
-    {
-        BallRollingInstance.setParameterByName("Speed", BallSpeed);
-        MusicInstance.setParameterByName("Speed", BallSpeed);
-    }
-    
-
-    public void BallRollingStop()
-    {
-        BallRollingInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-    }
-    */
-
-    // End of Environment Emitters ------------------------------------------------------------------
-
-
-    /*
-    public void BallImpact(Vector3 BallPosition)
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/3D/Ball_Impact", BallPosition);
-    }
-
-
-    public void Collectible()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Collectible");
-    }
-    */
 
     public void AmbientStart()
     {
-        AmbientInstance.start();
+        if (EventIsNotPlaying(AmbientInstance))
+        {
+            AmbientInstance.start();
+        }
+        
     }
     public void AmbientStop()
     {
         AmbientInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    /// <summary>
+    /// Sets Level for the music event
+    /// </summary>
+    /// <param name="SetLevel">
+    /// 0=Menu 
+    /// 1=Level_1
+    /// 2=Level_2
+    /// 3=Level_3
+    /// 4=Level_4
+    /// 10=Credits
+    /// </param>
+    public void AmbientSetLevel(int SetLevel)
+    {
+        AmbientInstance.setParameterByName("Level", SetLevel);
     }
 
     public void MusicStart()
@@ -175,11 +179,11 @@ public class AudioManager : MonoBehaviour
         MusicInstance.setParameterByName("Level", SetLevel);
     }
 
-    bool EventIsNotPlaying(FMOD.Studio.EventInstance instance)
+    bool EventIsNotPlaying(EventInstance instance)
     {
-        FMOD.Studio.PLAYBACK_STATE state;
+        PLAYBACK_STATE state;
         instance.getPlaybackState(out state);
-        return state != FMOD.Studio.PLAYBACK_STATE.PLAYING;
+        return state != PLAYBACK_STATE.PLAYING;
     }
 
     public void MusicBusSetVolume(float volume)
@@ -192,28 +196,63 @@ public class AudioManager : MonoBehaviour
         SFXBus.setVolume(volume);
     }
 
-    public void MonsterActivated(MonsterActivator monster)
+    public void MonsterScare(MonsterActivator monster)
     {
-        Vector3 monsterPosition = monster.Position;
+        EventInstance MonsterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/MonsterScare");
+        MonsterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(monster.gameObject));
 
         switch (monster.MyType)
         {
             case EMonsterType.MonsterA:
-
+                MonsterScareInstance.setParameterByName("MonsterType", 1);            
                 break;
             case EMonsterType.MonsterB:
-
+                MonsterScareInstance.setParameterByName("MonsterType", 2);
                 break;
             case EMonsterType.MonsterC:
-
+                MonsterScareInstance.setParameterByName("MonsterType", 3);
                 break;
             case EMonsterType.MonsterD:
-
+                MonsterScareInstance.setParameterByName("MonsterType", 4);
                 break;
 
             default:
-                Debug.LogError($"{nameof(MonsterActivated)} is UNDEFINED for {monster.MyType}.", this);
+                Debug.LogError($"{nameof(MonsterScare)} is UNDEFINED for {monster.MyType}.", this);
                 break;
         }
+
+        MonsterScareInstance.start();
+        MonsterScareInstance.release();
     }
+
+    
+    public void CharacterScare(Passenger passenger)
+    {
+        EventInstance CharacterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/CharacterScare");
+        CharacterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(passenger.gameObject));
+
+        switch (passenger.PassengerType)
+        {
+            case EPassengerType.JohnDoe:
+                Debug.LogError("Scare sound called for John Doe");
+                CharacterScareInstance.setParameterByName("CharacterType", 2);
+                break;
+            case EPassengerType.WeirdGirl:
+                CharacterScareInstance.setParameterByName("CharacterType", 1);
+                break;
+            case EPassengerType.Grandpa:
+                CharacterScareInstance.setParameterByName("CharacterType", 2);
+                break;
+            case EPassengerType.GigaChad:
+                CharacterScareInstance.setParameterByName("CharacterType", 3);
+                break;
+            default:
+                Debug.LogError($"{nameof(CharacterScare)} is UNDEFINED for {passenger.PassengerType}.", this);
+                break;
+        }
+
+        CharacterScareInstance.start();
+        CharacterScareInstance.release();
+    }
+    
 }
