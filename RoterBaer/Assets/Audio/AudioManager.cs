@@ -64,6 +64,15 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/MenuButtonBack()");
     }
 
+    public void PointsPositive()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsPositive");
+    }
+    public void PointsNegative()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsNegative");
+    }
+
 
     public void WagonInitialize(GameObject Wagon)
     {
