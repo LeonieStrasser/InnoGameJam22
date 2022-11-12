@@ -37,8 +37,7 @@ public class Passenger : MonoBehaviour
         }
     }
 
-
-    enum passangerMode
+    public enum EPassengerMode
     {
         bored,
         normal,
@@ -48,7 +47,8 @@ public class Passenger : MonoBehaviour
     }
     bool dead = false;
 
-    passangerMode myScareLevel = passangerMode.bored;
+    EPassengerMode myScareLevel = EPassengerMode.bored;
+    public EPassengerMode ScareLevel => myScareLevel;
 
     public void ScarePassenger(EMonsterType monsterType)
     {
@@ -74,23 +74,23 @@ public class Passenger : MonoBehaviour
     {
         if (scareValue > endOfBoredLevel && scareValue < littleScaredLevel)
         {
-            myScareLevel = passangerMode.normal;
+            myScareLevel = EPassengerMode.normal;
             imageAnim.SetBool("normal", true);
             zzzVfx.SetActive(false);
         }
         else if (scareValue > littleScaredLevel && scareValue < scaredLevel)
         {
-            myScareLevel = passangerMode.littleScared;
+            myScareLevel = EPassengerMode.littleScared;
             imageAnim.SetBool("littleScared", true);
         }
         else if (scareValue > scaredLevel && scareValue < 1)
         {
-            myScareLevel = passangerMode.scared;
+            myScareLevel = EPassengerMode.scared;
             imageAnim.SetBool("scared", true);
         }
         else if (scareValue >= 1)
         {
-            myScareLevel = passangerMode.despawn;
+            myScareLevel = EPassengerMode.despawn;
             imageAnim.SetBool("despawn", true);
             dead = true;
         }
