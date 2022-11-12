@@ -43,15 +43,15 @@ public class AudioManager : MonoBehaviour
     }
     public void SwitchAuto(Vector3 OneShotPosition)
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/SwitchAuto", OneShotPosition);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/SwitchAuto", OneShotPosition);
     }
     public void SwitchPlayer(Vector3 OneShotPosition)
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/SwitchPlayer", OneShotPosition);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/SwitchPlayer", OneShotPosition);
     }
-    public void WagonPassesSwitch(Vector3 OneShotPosition)
+    public void WagonOverTrackpoint(VisitorCart cart)
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/WagonPassesSwitch", OneShotPosition);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/WagonOverTrackpoint", cart.Position);
     }
 
     public void MenuButtonAccept()
@@ -84,11 +84,6 @@ public class AudioManager : MonoBehaviour
         wagonToEventInstance.Add(Wagon, WagonInstance);
     }
 
-    public void WagonReachedTrackSwitch(VisitorCart cart)
-    {
-        Vector3 cartPosition = cart.Position;
-
-    }
 
     public void WagonRetirement(GameObject Wagon)
     {

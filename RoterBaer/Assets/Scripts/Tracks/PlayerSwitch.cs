@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(TrackGate))]
 public class PlayerSwitch : MonoBehaviour
 {
+    [SerializeField] SpriteRenderer mySpriteRenderer;
+    [SerializeField] Sprite idleSprite;
+    [SerializeField] Sprite hoverSprite;
+
     TrackGate myGate;
 
     bool isHovered;
@@ -23,11 +27,13 @@ public class PlayerSwitch : MonoBehaviour
     private void OnMouseEnter()
     {
         SetHovered(true);
+        mySpriteRenderer.sprite = hoverSprite;
     }
 
     private void OnMouseExit()
     {
         SetHovered(false);
+        mySpriteRenderer.sprite = idleSprite;
     }
 
     private void SetHovered(bool isHovered)
@@ -41,4 +47,5 @@ public class PlayerSwitch : MonoBehaviour
         else
             transform.localScale /= 1.1f;
     }
+
 }

@@ -188,6 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cb89b5c64f2ff48b4709d79196b6e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mySpriteRenderer: {fileID: 5091276100346577233}
+  idleSprite: {fileID: 21300000, guid: f0839108cd382e44490cee0a8f0d12de, type: 3}
+  hoverSprite: {fileID: 21300000, guid: 413eee0eb78123949a40996fc876de9d, type: 3}
 --- !u!114 &4986974766668953936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,15 +258,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6793081991279941556, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.04
+      value: 0.099999994
       objectReference: {fileID: 0}
     - target: {fileID: 6793081991279941556, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.04
+      value: 0.099999994
       objectReference: {fileID: 0}
     - target: {fileID: 6793081991279941556, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.04
+      value: 0.099999994
       objectReference: {fileID: 0}
     - target: {fileID: 6793081991279941556, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_LocalPosition.y
@@ -271,7 +274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6793081991279941556, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.355
       objectReference: {fileID: 0}
     - target: {fileID: 6793081991279941556, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_LocalRotation.w
@@ -312,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 8711656180872397888, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e4e101b6451dc4645909d30814534171, type: 3}
+      objectReference: {fileID: 21300000, guid: f0839108cd382e44490cee0a8f0d12de, type: 3}
     - target: {fileID: 8711656180872397888, guid: 890e846c4694458458a92209de602a37, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -330,6 +333,11 @@ PrefabInstance:
 --- !u!4 &4303877370288066821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 431127488961745940, guid: 890e846c4694458458a92209de602a37, type: 3}
+  m_PrefabInstance: {fileID: 4486110248157070609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &5091276100346577233 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8711656180872397888, guid: 890e846c4694458458a92209de602a37, type: 3}
   m_PrefabInstance: {fileID: 4486110248157070609}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5628991457927204744 stripped
