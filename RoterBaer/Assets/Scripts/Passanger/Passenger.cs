@@ -34,6 +34,7 @@ public class Passenger : MonoBehaviour
         {
             stressLevel = value;
             SetScareLevel(value);
+
         }
     }
 
@@ -76,16 +77,20 @@ public class Passenger : MonoBehaviour
         {
             myScareLevel = passangerMode.normal;
             imageAnim.SetBool("normal", true);
+            imageAnim.SetTrigger("scream");
             zzzVfx.SetActive(false);
+
         }
         else if (scareValue > littleScaredLevel && scareValue < scaredLevel)
         {
             myScareLevel = passangerMode.littleScared;
+            imageAnim.SetTrigger("scream");
             imageAnim.SetBool("littleScared", true);
         }
         else if (scareValue > scaredLevel && scareValue < 1)
         {
             myScareLevel = passangerMode.scared;
+            imageAnim.SetTrigger("scream");
             imageAnim.SetBool("scared", true);
         }
         else if (scareValue >= 1)
