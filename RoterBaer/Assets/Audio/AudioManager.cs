@@ -216,34 +216,34 @@ public class AudioManager : MonoBehaviour
         MonsterScareInstance.release();
     }
 
-    /*
+    
     public void CharacterScare(Passenger passenger)
     {
-        EventInstance MonsterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/MonsterScare");
-        MonsterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(passenger.gameObject));
+        EventInstance CharacterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/CharacterScare");
+        CharacterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(passenger.gameObject));
 
-        switch (passenger.ScarePassenger)
+        switch (passenger.PassengerType)
         {
-            case MonsterType.MonsterA:
-                MonsterScareInstance.setParameterByName("MonsterType", 1);
+            case EPassengerType.JohnDoe:
+                Debug.LogError("Scare sound called for John Doe");
+                CharacterScareInstance.setParameterByName("CharacterType", 2);
                 break;
-            case MonsterType.MonsterB:
-                MonsterScareInstance.setParameterByName("MonsterType", 2);
+            case EPassengerType.WeirdGirl:
+                CharacterScareInstance.setParameterByName("CharacterType", 1);
                 break;
-            case MonsterType.MonsterC:
-                MonsterScareInstance.setParameterByName("MonsterType", 3);
+            case EPassengerType.Grandpa:
+                CharacterScareInstance.setParameterByName("CharacterType", 2);
                 break;
-            case MonsterType.MonsterD:
-                MonsterScareInstance.setParameterByName("MonsterType", 4);
+            case EPassengerType.GigaChad:
+                CharacterScareInstance.setParameterByName("CharacterType", 3);
                 break;
-
             default:
-                Debug.LogError($"{nameof(MonsterScare)} is UNDEFINED for {passenger.MyType}.", this);
+                Debug.LogError($"{nameof(CharacterScare)} is UNDEFINED for {passenger.PassengerType}.", this);
                 break;
         }
 
-        MonsterScareInstance.start();
-        MonsterScareInstance.release();
+        CharacterScareInstance.start();
+        CharacterScareInstance.release();
     }
-    */
+    
 }
