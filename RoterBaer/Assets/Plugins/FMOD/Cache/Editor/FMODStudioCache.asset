@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3363720610824177539
+--- !u!114 &-3026515851907048853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music
+  m_Name: event:/2D/Music
   m_EditorClassIdentifier: 
-  Path: event:/Music
+  Path: event:/2D/Music
   Guid:
     Data1: 1005156965
     Data2: 1117761275
@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638038091228933548
+  lastModified: 638038126026965459
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -61,14 +61,42 @@ MonoBehaviour:
   - {fileID: 3716008639870905440}
   - {fileID: -1291689812061229522}
   EditorEvents:
-  - {fileID: -3363720610824177539}
+  - {fileID: -3026515851907048853}
+  - {fileID: 2196480186440158025}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1291689812061229522}
   StringsBanks:
   - {fileID: 3716008639870905440}
-  cacheTime: 638038091228993510
+  cacheTime: 638038126027075239
   cacheVersion: 131593
+--- !u!114 &2196480186440158025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/2D/Ambient
+  m_EditorClassIdentifier: 
+  Path: event:/2D/Ambient
+  Guid:
+    Data1: 1077716377
+    Data2: 1315313254
+    Data3: 1846493590
+    Data4: -274934788
+  Banks:
+  - {fileID: -1291689812061229522}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3716008639870905440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,8 +112,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638038091228993510
+  lastModified: 638038126027075239
   FileSizes:
   - Name: 
-    Value: 754
+    Value: 940
   Exists: 1
