@@ -9,17 +9,22 @@ public class TrackGate : TrackPoint
 
     [SerializeField] TrackPoint nextExit;
 
+    public override ETrackType TrackType => ETrackType.Gate;
+
     protected override void Awake()
     {
         base.Awake();
 
-        if (nextExit == null && gateType == ETrackGateType.Fixed)
+        if (nextExit == null)
         {
-            Debug.LogError($"[{GetType().Name}] Fixed Gate '{gameObject.name}' with undefined Exit.", this);
+            if (gateType == ETrackGateType.Fixed)
+                Debug.LogError($"[{GetType().Name}] Fixed Gate '{gameObject.name}' with undefined Exit.", this);
 
             if (neighbors.Count > 0) nextExit = neighbors.First();
         }
     }
+
+    protected override bool HasValidNeighborCount => neighbors.Count >= 3;
 
     public override TrackPoint GetNextNode(TrackPoint previousPoint)
     {
@@ -47,17 +52,27 @@ public class TrackGate : TrackPoint
 
     public void SetNextExit(bool countUp)
     {
-        int nextID = 0;
+        int oldID = 0;
         for (int i = 0; i < neighbors.Count; i++)
         {
             if (neighbors[i] == nextExit)
             {
-                nextID = i;
+                oldID = i;
                 break;
             }
         }
 
-        nextID = (nextID + neighbors.Count + (countUp ? 1 : -1)) % neighbors.Count;
+        int nextID = oldID;
+        for (int i = 1; i < neighbors.Count; i++)
+        {
+            nextID = (oldID + neighbors.Count + (countUp ? i : -i)) % neighbors.Count;
+
+            if (!neighbors[nextID].IsNeverTarget)
+                break;
+        }
+
+        if (nextID == oldID)
+            Debug.LogWarning($"[{GetType().Name}] Gate couldn't be set different than old value of {neighbors[nextID]}", this);
 
         nextExit = neighbors[nextID];
     }
