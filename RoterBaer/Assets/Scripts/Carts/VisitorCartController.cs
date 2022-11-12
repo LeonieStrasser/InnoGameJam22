@@ -12,20 +12,23 @@ public class VisitorCartController : MonoBehaviour
 
     [SerializeField] float timeBetweenCarts = 5f;
 
+    float elapsed = 0;
     private void Awake()
     {
         if (Active != null && Active != this)
             Debug.LogError($"[{GetType().Name}] More than one Controller active!");
 
-        Active = this;
-
-        //InvokeRepeating("SpawnCart", 1f, timeBetweenCarts);
+        Active = this;        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        elapsed += Time.deltaTime;
+        if (elapsed >= timeBetweenCarts)
+        {
+            SpawnCart();
+            elapsed = 0;
+        }
     }
 
     public void SpawnCart()

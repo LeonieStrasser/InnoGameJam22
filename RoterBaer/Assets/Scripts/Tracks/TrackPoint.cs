@@ -61,7 +61,7 @@ public class TrackPoint : MonoBehaviour
     }
 
     #region Development
-    public void CheckProperNeighbors()
+    public virtual void CheckProperNeighbors()
     {
         List<TrackPoint> validList = new List<TrackPoint>(neighbors.Where((x) => x != null && x != this));
 

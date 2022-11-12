@@ -7,6 +7,8 @@ public class TrackGate : TrackPoint
 {
     public System.Action NextExitChangedEvent;
 
+    [SerializeField] List<TrackPoint> blockedDirections = new List<TrackPoint>();
+
     [SerializeField] ETrackGateType gateType;
 
     [SerializeField] TrackPoint nextExit;
@@ -26,9 +28,10 @@ public class TrackGate : TrackPoint
             if (neighbors.Count > 0)
             {
                 nextExit = neighbors.Where((x) => !x.IsNeverTarget).First();
-                NextExitChangedEvent?.Invoke();
             }
         }
+
+        NextExitChangedEvent?.Invoke();
     }
 
     protected override bool HasValidNeighborCount => neighbors.Count >= 3;
@@ -74,7 +77,7 @@ public class TrackGate : TrackPoint
         {
             nextID = (oldID + neighbors.Count + (countUp ? i : -i)) % neighbors.Count;
 
-            if (!neighbors[nextID].IsNeverTarget)
+            if (!neighbors[nextID].IsNeverTarget && !blockedDirections.Contains(neighbors[nextID]))
                 break;
         }
 
@@ -85,7 +88,25 @@ public class TrackGate : TrackPoint
         }
         else
             Debug.LogWarning($"[{GetType().Name}] Gate couldn't be set different than old value of {neighbors[nextID]}", this);
+    }
 
+    public override void CheckProperNeighbors()
+    {
+        base.CheckProperNeighbors();
+
+        bool atLeastOnePossible = false;
+
+        foreach (var neighbor in neighbors)
+        {
+            if (!neighbor.IsNeverTarget && !blockedDirections.Contains(neighbor))
+            {
+                atLeastOnePossible = true;
+                break;
+            }
+        }
+
+        if (!atLeastOnePossible)
+            Debug.LogError($"[{GetType().Name}] {gameObject.name} has no exit it might send Carts towards.", this);
     }
 }
 
