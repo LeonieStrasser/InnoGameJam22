@@ -55,7 +55,7 @@ public class MonsterActivator : MonoBehaviour
         foreach (var cart in cartsInRange)
             cart.GetComponent<VisitorCart>()?.ScarePassengers(myType);
 
-        AudioManager.instance.MonsterActivated(this);
+        AudioManager.instance.MonsterScare(this);
     }
 
     private void OnMouseDown()

@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
         SFXBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
 
         MusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Music");
-        AmbientInstance = FMODUnity.RuntimeManager.CreateInstance("event:Non-Spatialized/Ambient");
+        AmbientInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Ambient");
 
     }
     public void SwitchAuto(Vector3 OneShotPosition)
