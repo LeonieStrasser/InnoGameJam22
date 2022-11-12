@@ -5,24 +5,32 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class MonsterActivator : MonoBehaviour
 {
-    [SerializeField] KeyCode activateInput;
+   
+    [SerializeField] EMonsterType myType;
+    public EMonsterType MyType
+    {
+        get
+        {
+            return myType;
+        }
+    }
 
     [SerializeField] List<GameObject> cartsInRange;
+    MonsterController monsterHUB;
+
     Animator anim;
 
     private void Awake()
     {
+        monsterHUB = FindObjectOfType<MonsterController>();
         cartsInRange = new List<GameObject>();
         anim = GetComponentInChildren<Animator>();
     }
-
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(activateInput))
-        {
-            ActivateScare();
-        }
+        monsterHUB.AddMonsterToLists(this);
     }
+  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,8 +46,13 @@ public class MonsterActivator : MonoBehaviour
 
     }
 
-    private void ActivateScare()
+    public void ActivateScare()
     {
         anim.SetTrigger("scare");
+    }
+
+    private void OnMouseDown()
+    {
+        monsterHUB.SetMonsterListScareActive(myType);
     }
 }

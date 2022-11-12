@@ -165,3 +165,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateInput: 100
+  myType: 2
+  cartsInRange: []
