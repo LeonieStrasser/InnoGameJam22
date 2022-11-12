@@ -87,7 +87,7 @@ public class VisitorCart : MonoBehaviour
 
         //Debug.Log($"Moving towards {aim.gameObject.name}");
 
-        AudioManager.instance.WagonReachedTrackSwitch(this);
+        AudioManager.instance.WagonOverTrackpoint(this);
 
         MoveTowards(aim);
     }
