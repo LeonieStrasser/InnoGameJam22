@@ -8,6 +8,7 @@ public class TrackGate : TrackPoint
     [SerializeField] ETrackGateType gateType;
 
     [SerializeField] TrackPoint nextExit;
+    public TrackPoint NextExit => nextExit;
 
     public override ETrackType TrackType => ETrackType.Gate;
 
@@ -20,7 +21,7 @@ public class TrackGate : TrackPoint
             if (gateType == ETrackGateType.Fixed)
                 Debug.LogError($"[{GetType().Name}] Fixed Gate '{gameObject.name}' with undefined Exit.", this);
 
-            if (neighbors.Count > 0) nextExit = neighbors.First();
+            if (neighbors.Count > 0) nextExit = neighbors.Where((x)=> !x.IsNeverTarget).First();
         }
     }
 

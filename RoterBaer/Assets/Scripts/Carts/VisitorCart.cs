@@ -41,7 +41,7 @@ public class VisitorCart : MonoBehaviour
 
         float movementTime = Vector3.Distance(startPosition, targetPosition) / MovementSpeed;
 
-        Debug.Log($"[{GetType().Name}] Moves from {OriginTrackPoint}{startPosition} to {TargetTrackPoint}{targetPosition} in {movementTime}.", this);
+        Debug.Log($"[{GetType().Name}] Moves from {OriginTrackPoint} to {TargetTrackPoint} in {movementTime}.", this);
 
         float elapsed = 0;
 
