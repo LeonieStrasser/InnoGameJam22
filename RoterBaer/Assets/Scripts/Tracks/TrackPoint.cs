@@ -102,7 +102,7 @@ public class TrackPointEditor : UnityEditor.Editor
         if (GUILayout.Button("Draw Track Network"))
         {
             foreach (var trackPoint in FindObjectsOfType<TrackPoint>())
-                trackPoint.DrawLineToNeighbors(10f);
+                trackPoint.DrawLineToNeighbors(40f);
         }
         if (GUILayout.Button("Add missing Neighbors"))
         {
