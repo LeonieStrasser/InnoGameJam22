@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class AudioManager : MonoBehaviour
     private FMOD.Studio.Bus MusicBus;
     private FMOD.Studio.Bus SFXBus;
 
-
+    Dictionary<GameObject, EventInstance> wagonToEventInstance = new Dictionary<GameObject, EventInstance>();
 
     private void Awake()
     {
@@ -68,8 +69,22 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(FlyingCarInstance, FlyingCar.transform, FlyingCar.GetComponent<Rigidbody>());
         FlyingCarInstance.start();
         FlyingCarInstance.release();
+
+        wagonToEventInstance.Add(FlyingCar, FlyingCarInstance);
     }
 
+    public void WagonRetirement(GameObject FlyingCar)
+    {
+        if (!wagonToEventInstance.ContainsKey(FlyingCar))
+        {
+            Debug.LogError($"Requested Retirement of unknown car {FlyingCar.gameObject.name}", FlyingCar);
+            return;
+        }
+        
+        wagonToEventInstance[FlyingCar].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        wagonToEventInstance.Remove(FlyingCar);
+    }
 
     public void StopAllEnvEmitters()
     {

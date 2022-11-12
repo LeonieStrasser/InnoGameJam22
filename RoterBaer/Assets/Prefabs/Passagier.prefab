@@ -4847,8 +4847,8 @@ Transform:
   m_GameObject: {fileID: 679664472971560230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.419, y: 0.399, z: 0.15}
-  m_LocalScale: {x: 2.06, y: 2.06, z: 2.06}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4069737192844485548}
   - {fileID: 1808948268}
@@ -4868,13 +4868,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passengerType: 0
-  standardScariness: 0.2
+  standardScariness: 0.77
   scarinessOfMonsters: []
-  imageAnim: {fileID: 0}
-  endOfBoredLevel: 0
-  littleScaredLevel: 0
-  scaredLevel: 0
-  zzzVfx: {fileID: 1808948267}
+  imageAnim: {fileID: 5455456754152669675}
 --- !u!1 &1996047120370618722
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class MonsterActivator : MonoBehaviour
 {
-   
+
     [SerializeField] EMonsterType myType;
     public EMonsterType MyType
     {
@@ -30,16 +30,17 @@ public class MonsterActivator : MonoBehaviour
     {
         monsterHUB.AddMonsterToLists(this);
     }
-  
+
 
     private void OnTriggerEnter(Collider other)
     {
-        cartsInRange.Add(other.gameObject);
+        if (other.CompareTag("Cart"))
+            cartsInRange.Add(other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (cartsInRange.Find(i => other.gameObject))
+        if (other.CompareTag("Cart") && cartsInRange.Find(i => other.gameObject))
         {
             cartsInRange.Remove(other.gameObject);
         }
@@ -49,6 +50,9 @@ public class MonsterActivator : MonoBehaviour
     public void ActivateScare()
     {
         anim.SetTrigger("scare");
+
+        foreach (var cart in cartsInRange)
+            cart.GetComponent<VisitorCart>()?.ScarePassengers(myType);
     }
 
     private void OnMouseDown()

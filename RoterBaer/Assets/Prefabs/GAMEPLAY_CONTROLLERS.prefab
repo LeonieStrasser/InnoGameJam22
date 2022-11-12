@@ -44,6 +44,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01132f9183d0bab4d825f53c58e1e404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateInputA: 97
+  activateInputB: 115
+  activateInputC: 100
+  activateInputD: 119
+--- !u!1 &4010228048465136918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2903803284742100257}
+  - component: {fileID: 6524054381889668254}
+  m_Layer: 0
+  m_Name: HighscoreCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2903803284742100257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010228048465136918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6217704178149460163}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6524054381889668254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010228048465136918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa7d9da268cb604681ab12cd71d37f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4329731742776841562
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,9 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298e490ee62f6e241985979f895e5877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabVisitorCart: {fileID: 1907333710165667486, guid: b4b5ce9eddaa1fb4980e74e83e02440b, type: 3}
   timeBetweenCarts: 1
   cartLimit: 10
+  prefabVisitorCart: {fileID: 2763566969840124966, guid: 5a33c0d953923bf49b16f51154ddb4cf, type: 3}
+  prefabPassenger:
+  - {fileID: 8720868203463691661, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
 --- !u!1 &4632360300391378585
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +218,7 @@ Transform:
   - {fileID: 2539720175006353401}
   - {fileID: 729634979892554938}
   - {fileID: 1201939086572938354}
+  - {fileID: 2903803284742100257}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

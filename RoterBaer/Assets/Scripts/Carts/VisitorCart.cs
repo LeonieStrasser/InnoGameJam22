@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class VisitorCart : MonoBehaviour
 {
+    [SerializeField, Min(0.1f)] float MovementSpeed = 1;
+
+    [SerializeField] Transform[] passengerPositions = new Transform[1];
+
+    public int PassengerSeatCount => passengerPositions.Length;
+
     public TrackPoint OriginTrackPoint { get; private set; }
     public TrackPoint TargetTrackPoint { get; private set; }
 
     Coroutine movementCoroutine;
+
+    Passenger[] passengers;
 
     public Vector3 Position
     {
@@ -15,10 +23,11 @@ public class VisitorCart : MonoBehaviour
         private set => transform.position = value;
     }
 
-    [SerializeField, Min(0.1f)] float MovementSpeed = 1;
 
-    public void StartRunning(TrackPoint startPoint)
+    public void SetupCart(TrackPoint startPoint, Passenger[] passengers)
     {
+        PlacePassengers(passengers);
+
         OriginTrackPoint = startPoint;
         MoveTowards(startPoint.GetNextNode(OriginTrackPoint));
     }
@@ -78,5 +87,22 @@ public class VisitorCart : MonoBehaviour
 
         Debug.Log($"Moving towards {aim.gameObject.name}");
         MoveTowards(aim);
+    }
+
+    private void PlacePassengers(Passenger[] passengers)
+    {
+        this.passengers = passengers;
+
+        for (int i = 0; i <Mathf.Min( passengers.Length, passengerPositions.Length); i++)
+        {
+            passengers[i].transform.SetParent(passengerPositions[i]);
+            passengers[i].transform.localPosition = Vector3.zero;
+        }
+    }
+
+    public void ScarePassengers(EMonsterType monsterType)
+    {
+        for (int i = 0; i < passengers.Length; i++)
+            passengers[i].ScarePassenger(monsterType);
     }
 }
