@@ -6,6 +6,8 @@ public class GateDirectionFeedback : MonoBehaviour
 {
     [SerializeField] GameObject directionSprite;
     [SerializeField] float rotationSpeed;
+
+    
     
     TrackGate myTrackGate;
 
@@ -35,5 +37,5 @@ public class GateDirectionFeedback : MonoBehaviour
         directionSprite.transform.LookAt(myTrackGate.NextExit.transform);
     }
 
-
+  
 }
