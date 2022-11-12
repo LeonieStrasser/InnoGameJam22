@@ -1,0 +1,9 @@
+{90fe1b22-875b-481d-a21e-83045946f926} bank:/Master
+{08e33bf6-f620-045f-2457-09faa8b5ffbe} bank:/Master.strings
+{983c0bad-9924-441b-8bae-bb3bd9900f45} bus:/
+{1f2a69c9-8746-4c7b-8b52-4f13a4098aa2} bus:/MusicBus
+{cab5c99c-86ac-4910-9604-62f0cfe84276} bus:/Reverb
+{070f794e-6127-4d0c-993c-61b3f981e383} bus:/SFXBus
+{3f6137c0-c0d5-4f47-b5b1-d3dce1be57fe} bus:/SFXBus/EnvEmitterBus
+{403ca599-1666-4e66-9641-0f6efcd39cef} event:/2D/Ambient
+{3be97a65-aefb-429f-aa5e-c609d1a4f0ac} event:/2D/Music
