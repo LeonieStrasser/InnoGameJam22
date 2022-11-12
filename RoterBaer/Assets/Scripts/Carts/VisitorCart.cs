@@ -17,12 +17,13 @@ public class VisitorCart : MonoBehaviour
 
     Passenger[] passengers;
 
+    bool isScareEndagered;
+
     public Vector3 Position
     {
         get => transform.position;
         private set => transform.position = value;
     }
-
 
     public void SetupCart(TrackPoint startPoint, Passenger[] passengers)
     {
@@ -107,5 +108,16 @@ public class VisitorCart : MonoBehaviour
     {
         for (int i = 0; i < passengers.Length; i++)
             passengers[i].ScarePassenger(monsterType);
+    }
+
+    public void IsScareEndangered(bool isHovered)
+    {
+        if (isScareEndagered == isHovered) return;
+        isScareEndagered = isHovered;
+
+        if (isHovered)
+            transform.localScale *= 1.1f;
+        else
+            transform.localScale /= 1.1f;
     }
 }

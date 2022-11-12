@@ -83,13 +83,13 @@ public class AudioManager : MonoBehaviour
     {
         if (!wagonToEventInstance.ContainsKey(FlyingCar))
         {
-            Debug.LogError($"Requested Retirement of unknown car {FlyingCar.gameObject.name}", FlyingCar);
+            Debug.LogWarning($"[AudioManager] Requested Retirement of unknown car {FlyingCar.gameObject.name}", FlyingCar);
             return;
         }
 
-        wagonToEventInstance[FlyingCar].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
         wagonToEventInstance.Remove(FlyingCar);
+
+        wagonToEventInstance[FlyingCar].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     public void StopAllEnvEmitters()

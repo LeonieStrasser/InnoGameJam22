@@ -16,7 +16,7 @@ public class VisitorCartController : MonoBehaviour
     [SerializeField] VisitorCart prefabVisitorCart;
     [SerializeField] Passenger[] prefabPassenger;
 
-    float elapsed = 0;
+    float elapsed = -1;
     private void Awake()
     {
         if (Active != null && Active != this)
@@ -35,8 +35,8 @@ public class VisitorCartController : MonoBehaviour
         elapsed += Time.deltaTime;
         if (elapsed >= timeBetweenCarts)
         {
-            SpawnCart();
             elapsed = 0;
+            SpawnCart();
         }
     }
 
@@ -60,6 +60,9 @@ public class VisitorCartController : MonoBehaviour
 
         activeCarts.Remove(arrivingCart);
         AudioManager.instance.WagonRetirement(arrivingCart.gameObject);
+
+        foreach (Passenger passenger in arrivingCart.GetComponentsInChildren<Passenger>())
+            HighscoreCounter.Active.PassengerLeft(passenger);
 
         Destroy(arrivingCart.gameObject);
     }

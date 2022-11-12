@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
+    public static MonsterController Active { get; private set; }
+
     [SerializeField] KeyCode activateInputA;
     [SerializeField] KeyCode activateInputB;
     [SerializeField] KeyCode activateInputC;
@@ -15,6 +17,10 @@ public class MonsterController : MonoBehaviour
     List<MonsterActivator> monstersC;
     List<MonsterActivator> monstersD;
 
+    private void Awake()
+    {
+        Active = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +102,25 @@ public class MonsterController : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    public List<MonsterActivator> GetMonsters(EMonsterType monsterType)
+    {
+        switch (monsterType)
+        {
+            case EMonsterType.MonsterA:
+                return monstersA;
+            case EMonsterType.MonsterB:
+                return monstersB;
+            case EMonsterType.MonsterC:
+                return monstersC;
+            case EMonsterType.MonsterD:
+                return monstersD;
+
+            default:
+                Debug.LogError($"[{GetType().Name}] {nameof(GetMonsters)} UNDEFINED for {monsterType}.", this);
+                return null;
         }
     }
 }
