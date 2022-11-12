@@ -107,6 +107,9 @@ public class TrackGate : TrackPoint
 
         if (!atLeastOnePossible)
             Debug.LogError($"[{GetType().Name}] {gameObject.name} has no exit it might send Carts towards.", this);
+
+        if (!neighbors.Contains(nextExit))
+            Debug.LogError($"[{GetType().Name}] {gameObject.name} {nameof(nextExit)} is set to a Node thats not it's neighbor.", this);
     }
 }
 

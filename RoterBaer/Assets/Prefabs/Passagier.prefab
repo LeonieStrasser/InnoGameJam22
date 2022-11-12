@@ -4831,7 +4831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5959603055805103823}
   - component: {fileID: 8720868203463691661}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Passagier
   m_TagString: Untagged
   m_Icon: {fileID: 0}

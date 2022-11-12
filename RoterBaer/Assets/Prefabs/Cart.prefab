@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7961424415423581038}
   - component: {fileID: 2763566969840124966}
   - component: {fileID: -1270425791356756472}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cart
   m_TagString: Cart
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3583675858041740968}
   - component: {fileID: 7614615220662917429}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3623496751210994260}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PassengerPosition2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4264340921149037095}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PassengerPosition1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
