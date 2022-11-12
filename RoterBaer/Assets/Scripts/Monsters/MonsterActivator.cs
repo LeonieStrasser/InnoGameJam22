@@ -7,7 +7,7 @@ public class MonsterActivator : MonoBehaviour
 {
     [SerializeField] KeyCode activateInput;
 
-    List<GameObject> cartsInRange;
+    [SerializeField] List<GameObject> cartsInRange;
     Animator anim;
 
     private void Awake()
