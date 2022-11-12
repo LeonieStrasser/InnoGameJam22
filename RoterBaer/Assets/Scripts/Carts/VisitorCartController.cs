@@ -25,6 +25,11 @@ public class VisitorCartController : MonoBehaviour
         Active = this;
     }
 
+    private void OnDestroy()
+    {
+        AudioManager.instance.StopAllEnvEmitters();
+    }
+
     private void Update()
     {
         elapsed += Time.deltaTime;
@@ -45,6 +50,7 @@ public class VisitorCartController : MonoBehaviour
         newCart.SetupCart(TrackController.Active.StartPoint, CreatePassengers(newCart.PassengerSeatCount));
 
         activeCarts.Add(newCart);
+        AudioManager.instance.WagonInitialize(newCart.gameObject);
     }
 
     public void ReachedEnd(VisitorCart arrivingCart)
@@ -53,6 +59,8 @@ public class VisitorCartController : MonoBehaviour
             Debug.LogWarning($"[{GetType().Name}] Cart {arrivingCart.gameObject.name} didn't arrive at expected End: {arrivingCart.TargetTrackPoint}", arrivingCart);
 
         activeCarts.Remove(arrivingCart);
+        AudioManager.instance.WagonRetirement(arrivingCart.gameObject);
+
         Destroy(arrivingCart.gameObject);
     }
 
