@@ -8,11 +8,13 @@ public class VisitorCartController : MonoBehaviour
 
     private List<VisitorCart> activeCarts = new List<VisitorCart>();
 
-    [SerializeField] VisitorCart prefabVisitorCart;
-
     [SerializeField] float timeBetweenCarts = 5f;
 
     [SerializeField, Min(1)] int cartLimit = 10;
+
+    [Header("Prefabs")]
+    [SerializeField] VisitorCart prefabVisitorCart;
+    [SerializeField] Passenger[] prefabPassenger;
 
     float elapsed = 0;
     private void Awake()
@@ -20,7 +22,7 @@ public class VisitorCartController : MonoBehaviour
         if (Active != null && Active != this)
             Debug.LogError($"[{GetType().Name}] More than one Controller active!");
 
-        Active = this;        
+        Active = this;
     }
 
     private void Update()
@@ -40,7 +42,7 @@ public class VisitorCartController : MonoBehaviour
         VisitorCart newCart = Instantiate(prefabVisitorCart, TrackController.Active.StartPoint.Position, Quaternion.identity);
 
         newCart.transform.SetParent(transform);
-        newCart.StartRunning(TrackController.Active.StartPoint);
+        newCart.SetupCart(TrackController.Active.StartPoint, CreatePassengers(newCart.PassengerSeatCount));
 
         activeCarts.Add(newCart);
     }
@@ -52,6 +54,19 @@ public class VisitorCartController : MonoBehaviour
 
         activeCarts.Remove(arrivingCart);
         Destroy(arrivingCart.gameObject);
+    }
+
+    public Passenger[] CreatePassengers(int passengerCount)
+    {
+        if (passengerCount < 1)
+            Debug.LogError($"[{GetType().Name}] Got Request to create less than one passengers: {passengerCount}");
+
+        Passenger[] result = new Passenger[passengerCount];
+        for (int i = 0; i < passengerCount; i++)
+        {
+            result[i] = Instantiate(prefabPassenger[Random.Range(0, prefabPassenger.Length)], transform);
+        }
+        return result;
     }
 }
 

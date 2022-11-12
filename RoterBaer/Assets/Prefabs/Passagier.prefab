@@ -4867,6 +4867,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c305db68fee85e40a691e5e0fbb73a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passengerType: 0
+  standardScariness: 0.77
+  scarinessOfMonsters: []
+  imageAnim: {fileID: 5455456754152669675}
 --- !u!1 &1996047120370618722
 GameObject:
   m_ObjectHideFlags: 0
