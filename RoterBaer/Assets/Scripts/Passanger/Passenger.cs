@@ -19,6 +19,13 @@ public class Passenger : MonoBehaviour
 
     [SerializeField] Animator imageAnim;
 
+    [Header("Scare States")]
+    [SerializeField] [Range(0, 1)] float endOfBoredLevel;
+    [SerializeField] [Range(0, 1)] float littleScaredLevel;
+    [SerializeField] [Range(0, 1)] float scaredLevel;
+    [Space(10)]
+    [SerializeField] GameObject zzzVfx;
+
     private float stressLevel = 0;
     public float StressLevel
     {
@@ -26,9 +33,21 @@ public class Passenger : MonoBehaviour
         set
         {
             stressLevel = value;
-            imageAnim.SetFloat("stressLevel", value);
+            SetScareLevel(value);
         }
     }
+
+
+    enum passangerMode
+    {
+        bored,
+        normal,
+        littleScared,
+        scared,
+        despawn
+    }
+
+    passangerMode myScareLevel = passangerMode.bored;
 
     public void ScarePassenger(EMonsterType monsterType)
     {
@@ -36,7 +55,7 @@ public class Passenger : MonoBehaviour
 
         foreach (var monster in scarinessOfMonsters)
         {
-            if(monsterType == monster.monsterType)
+            if (monsterType == monster.monsterType)
             {
                 monsterSpecificScariness = monster.scariness;
                 break;
@@ -44,5 +63,30 @@ public class Passenger : MonoBehaviour
         }
 
         StressLevel += monsterSpecificScariness;
+    }
+
+    void SetScareLevel(float scareValue)
+    {
+        if (scareValue > endOfBoredLevel)
+        {
+            myScareLevel = passangerMode.normal;
+            imageAnim.SetBool("normal", true);
+            zzzVfx.SetActive(false);
+        }
+        else if (scareValue > littleScaredLevel)
+        {
+            myScareLevel = passangerMode.littleScared;
+            imageAnim.SetBool("littleScared", true);
+        }
+        else if (scareValue > scaredLevel)
+        {
+            myScareLevel = passangerMode.scared;
+            imageAnim.SetBool("scared", true);
+        }
+        else if (scareValue >= 1)
+        {
+            myScareLevel = passangerMode.despawn;
+            imageAnim.SetBool("despawn", true);
+        }
     }
 }
