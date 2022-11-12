@@ -85,7 +85,10 @@ public class VisitorCart : MonoBehaviour
         }
         TrackPoint aim = TargetTrackPoint.GetNextNode(OriginTrackPoint);
 
-        Debug.Log($"Moving towards {aim.gameObject.name}");
+        //Debug.Log($"Moving towards {aim.gameObject.name}");
+
+        AudioManager.instance.WagonReachedTrackSwitch(this);
+
         MoveTowards(aim);
     }
 

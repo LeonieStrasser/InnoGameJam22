@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
 
     public static AudioManager instance = null;
-    
+
     private FMOD.Studio.EventInstance MusicInstance;
     private FMOD.Studio.EventInstance AmbientInstance;
     private FMOD.Studio.Bus EnvEmittersBus;
@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         DontDestroyOnLoad(gameObject);
 
     }
@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
         //FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Button_Cancel");
     }
 
-    
+
     // Environment Emitters ------------------------------------------------------------------
 
 
@@ -73,6 +73,12 @@ public class AudioManager : MonoBehaviour
         wagonToEventInstance.Add(FlyingCar, FlyingCarInstance);
     }
 
+    public void WagonReachedTrackSwitch(VisitorCart cart)
+    {
+        Vector3 cartPosition = cart.Position;
+
+    }
+
     public void WagonRetirement(GameObject FlyingCar)
     {
         if (!wagonToEventInstance.ContainsKey(FlyingCar))
@@ -80,7 +86,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogError($"Requested Retirement of unknown car {FlyingCar.gameObject.name}", FlyingCar);
             return;
         }
-        
+
         wagonToEventInstance[FlyingCar].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         wagonToEventInstance.Remove(FlyingCar);
@@ -130,7 +136,7 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Collectible");
     }
     */
- 
+
     public void AmbientStart()
     {
         AmbientInstance.start();
@@ -186,8 +192,28 @@ public class AudioManager : MonoBehaviour
         SFXBus.setVolume(volume);
     }
 
-    void Update()
+    public void MonsterActivated(MonsterActivator monster)
     {
-        
+        Vector3 monsterPosition = monster.Position;
+
+        switch (monster.MyType)
+        {
+            case EMonsterType.MonsterA:
+
+                break;
+            case EMonsterType.MonsterB:
+
+                break;
+            case EMonsterType.MonsterC:
+
+                break;
+            case EMonsterType.MonsterD:
+
+                break;
+
+            default:
+                Debug.LogError($"{nameof(MonsterActivated)} is UNDEFINED for {monster.MyType}.", this);
+                break;
+        }
     }
 }

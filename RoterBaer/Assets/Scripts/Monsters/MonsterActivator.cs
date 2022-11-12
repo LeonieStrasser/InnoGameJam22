@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class MonsterActivator : MonoBehaviour
 {
-
     [SerializeField] EMonsterType myType;
     public EMonsterType MyType
     {
@@ -17,6 +16,8 @@ public class MonsterActivator : MonoBehaviour
 
     [SerializeField] List<GameObject> cartsInRange;
     MonsterController monsterHUB;
+
+    public Vector3 Position => transform.position;
 
     Animator anim;
 
@@ -53,6 +54,8 @@ public class MonsterActivator : MonoBehaviour
 
         foreach (var cart in cartsInRange)
             cart.GetComponent<VisitorCart>()?.ScarePassengers(myType);
+
+        AudioManager.instance.MonsterActivated(this);
     }
 
     private void OnMouseDown()
