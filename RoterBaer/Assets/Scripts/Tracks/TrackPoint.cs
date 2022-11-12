@@ -74,7 +74,12 @@ public class TrackPoint : MonoBehaviour
         }
 
         if (!HasValidNeighborCount)
-            Debug.LogError($"[{GetType().Name}] {gameObject.name} has unexpected amount of neighbors: {neighbors.Count}.", this);
+        {
+            if (TrackType == ETrackType.Gate && neighbors.Count > 1)
+                Debug.LogWarning($"[{GetType().Name}] {gameObject.name} has unexpected amount of neighbors: {neighbors.Count}.", this);
+            else
+                Debug.LogError($"[{GetType().Name}] {gameObject.name} has unexpected amount of neighbors: {neighbors.Count}.", this);
+        }
 
         foreach (var neighbor in neighbors)
         {

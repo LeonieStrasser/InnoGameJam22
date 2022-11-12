@@ -78,3 +78,4 @@ RoterBaer/[Aa]ssets/StreamingAssets/**/*.bank.meta
 # If the source bank files are kept outside of the StreamingAssets folder then these can be ignored.
 # Log files can be ignored.
 RoterBaer/fmod_editor.log
+RoterBaer/UserSettings/Layouts

@@ -59,6 +59,6 @@ public class VisitorCartControllerEditor : UnityEditor.Editor
             ((VisitorCartController)target).SpawnCart();
         }
 
-        base.OnHeaderGUI();
+        base.OnInspectorGUI();
     }
 }

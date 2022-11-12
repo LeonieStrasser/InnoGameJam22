@@ -693,8 +693,8 @@ MonoBehaviour:
   - {fileID: 468795589}
   - {fileID: 2002579670}
   - {fileID: 560401358}
-  gateType: 1
-  nextExit: {fileID: 0}
+  gateType: 0
+  nextExit: {fileID: 560401358}
 --- !u!1001 &1477516559
 PrefabInstance:
   m_ObjectHideFlags: 0
