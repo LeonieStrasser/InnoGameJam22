@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TrackGate : TrackPoint
 {
+    public System.Action NextExitChangedEvent;
+
     [SerializeField] ETrackGateType gateType;
 
     [SerializeField] TrackPoint nextExit;
@@ -21,7 +23,11 @@ public class TrackGate : TrackPoint
             if (gateType == ETrackGateType.Fixed)
                 Debug.LogError($"[{GetType().Name}] Fixed Gate '{gameObject.name}' with undefined Exit.", this);
 
-            if (neighbors.Count > 0) nextExit = neighbors.Where((x)=> !x.IsNeverTarget).First();
+            if (neighbors.Count > 0)
+            {
+                nextExit = neighbors.Where((x) => !x.IsNeverTarget).First();
+                NextExitChangedEvent?.Invoke();
+            }
         }
     }
 
@@ -72,10 +78,14 @@ public class TrackGate : TrackPoint
                 break;
         }
 
-        if (nextID == oldID)
+        if (nextID != oldID)
+        {
+            nextExit = neighbors[nextID];
+            NextExitChangedEvent?.Invoke();
+        }
+        else
             Debug.LogWarning($"[{GetType().Name}] Gate couldn't be set different than old value of {neighbors[nextID]}", this);
 
-        nextExit = neighbors[nextID];
     }
 }
 
