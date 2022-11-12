@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class VisitorCart : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    TrackPoint nextAim;
+
+    private void Start()
     {
-        
+        enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartRunning(TrackPoint startPoint)
     {
-        
+        MoveTowards(startPoint.GetNextNode(null));
+    }
+
+    private void Update()
+    {
+
+    }
+    private void MoveTowards(TrackPoint nextAim)
+    {
+        this.nextAim = nextAim;
+        enabled = true;
     }
 }

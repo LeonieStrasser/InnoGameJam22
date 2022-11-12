@@ -9,6 +9,8 @@ public class TrackPoint : MonoBehaviour
 
     [SerializeField] protected List<TrackPoint> neighbors = new List<TrackPoint>();
 
+    public Vector3 Position => transform.position;
+
     protected virtual void Awake()
     {
         if (neighbors.Where((x) => x != null).Count() < 2)
@@ -29,7 +31,7 @@ public class TrackPoint : MonoBehaviour
 
     public virtual TrackPoint GetNextNode(TrackPoint previousPoint)
     {
-        if (IsValidPreviousPoint(previousPoint))
+        if (previousPoint == null || IsValidPreviousPoint(previousPoint))
         {
             foreach (var point in neighbors)
             {

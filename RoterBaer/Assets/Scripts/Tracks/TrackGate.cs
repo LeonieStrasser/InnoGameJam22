@@ -23,7 +23,7 @@ public class TrackGate : TrackPoint
 
     public override TrackPoint GetNextNode(TrackPoint previousPoint)
     {
-        if (!IsValidPreviousPoint(previousPoint))
+        if (previousPoint != null && !IsValidPreviousPoint(previousPoint))
             return previousPoint;
 
         switch (gateType)
