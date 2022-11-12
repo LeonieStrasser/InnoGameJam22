@@ -59,7 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1510172897fc7bf4aa4275d1c8a8a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateInput: 97
+  myType: 0
+  cartsInRange: []
 --- !u!1 &2392460980652516565
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,8 +135,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: eb3e9dbdb5275a043916dbb2366f01ad, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.1764706}
+  m_Sprite: {fileID: 21300000, guid: b0359bb666d79934ca1587aebaa15435, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
