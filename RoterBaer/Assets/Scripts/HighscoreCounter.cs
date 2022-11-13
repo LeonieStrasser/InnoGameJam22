@@ -5,7 +5,13 @@ using UnityEngine;
 public class HighscoreCounter : MonoBehaviour
 {
     [SerializeField] int highscoreLevelID;
+    [SerializeField] float roundLengthSeconds = 60;
+    float currentRoundLength = 0;
+    bool gameEnded = false;
+
+    [Space]
     [SerializeField] HighscoreListVisual highscoreList;
+    [SerializeField] Canvas runningRoundScoreCanvas;
 
     const int TRACKED_HIGHSCORES = 10;
     const string PREFAB_HIGHSCORE = "HighScore_Level{0}_Rank{1}";
@@ -15,6 +21,7 @@ public class HighscoreCounter : MonoBehaviour
     bool highscoreSaved;
 
     int currentHighscore = 0;
+
     public int Highscore
     {
         get => currentHighscore;
@@ -63,6 +70,8 @@ public class HighscoreCounter : MonoBehaviour
             BestHighscore = PlayerPrefs.GetInt(GetPlayerPrefabKey(highscoreLevelID, 1));
         else
             BestHighscore = currentHighscore;
+
+        if (roundLengthSeconds <= 0) enabled = false;
     }
 
     private void OnDestroy()
@@ -70,15 +79,27 @@ public class HighscoreCounter : MonoBehaviour
         if (!highscoreSaved) SaveHighscore(highscoreLevelID, currentHighscore);
     }
 
+    private void Update()
+    {
+        currentRoundLength += Time.deltaTime;
+
+        if (currentRoundLength > roundLengthSeconds)
+        {
+            Endgame();
+            enabled = false;
+        }
+    }
+
     public void PassengerLeft(Passenger passenger)
     {
+        if (gameEnded) return;
+
         int addedPoint = ScareLevelPoints(passenger.ScareLevel);
 
         if (addedPoint > 0)
             AudioManager.instance.PointsPositive();
         else if (addedPoint < 0)
             AudioManager.instance.PointsNegative();
-
 
         Highscore = Mathf.Max(0, Highscore + ScareLevelPoints(passenger.ScareLevel));
     }
@@ -104,6 +125,18 @@ public class HighscoreCounter : MonoBehaviour
         }
     }
 
+    private void Endgame()
+    {
+        gameEnded = true;
+
+        VisitorCartController.Active.SetSpawnCarts(false);
+
+        SaveHighscore(highscoreLevelID, currentHighscore);
+        highscoreSaved = true;
+
+        runningRoundScoreCanvas.enabled = false;
+        highscoreList.SetupHighscore(highscoreLevelID, currentHighscore);
+    }
 
     #region Saving Highscore
     private static string GetPlayerPrefabKey(int levelID, int rank) => string.Format(PREFAB_HIGHSCORE, levelID, rank);
@@ -116,6 +149,7 @@ public class HighscoreCounter : MonoBehaviour
 
         scores.Add(newScore);
         scores.Sort();
+        scores.Reverse();
 
         for (int pos = 0; pos < Mathf.Min(TRACKED_HIGHSCORES, scores.Count); pos++)
         {

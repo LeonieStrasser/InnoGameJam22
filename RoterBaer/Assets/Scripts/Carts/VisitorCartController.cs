@@ -17,6 +17,9 @@ public class VisitorCartController : MonoBehaviour
     [SerializeField] Passenger[] prefabPassenger;
 
     float elapsed = -1;
+
+    bool spawnActive = true;
+
     private void Awake()
     {
         if (Active != null && Active != this)
@@ -42,7 +45,7 @@ public class VisitorCartController : MonoBehaviour
 
     public void SpawnCart()
     {
-        if (activeCarts.Count >= cartLimit) return;
+        if (activeCarts.Count >= cartLimit || !spawnActive) return;
 
         VisitorCart newCart = Instantiate(prefabVisitorCart, TrackController.Active.StartPoint.Position, Quaternion.identity);
 
@@ -78,6 +81,11 @@ public class VisitorCartController : MonoBehaviour
             result[i] = Instantiate(prefabPassenger[Random.Range(0, prefabPassenger.Length)], transform);
         }
         return result;
+    }
+
+    public void SetSpawnCarts(bool shouldSpawn)
+    {
+        this.spawnActive = shouldSpawn;
     }
 }
 

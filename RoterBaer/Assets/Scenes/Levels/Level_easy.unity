@@ -2814,8 +2814,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1013738940}
-  - {fileID: 1531704539}
   - {fileID: 859492197}
+  - {fileID: 1531704539}
   - {fileID: 729108942}
   - {fileID: 620205068}
   - {fileID: 891573599}
@@ -4309,6 +4309,10 @@ PrefabInstance:
     - target: {fileID: 6217704178149460163, guid: 960790ed3fa02024697320997501598e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524054381889668254, guid: 960790ed3fa02024697320997501598e, type: 3}
+      propertyPath: highscoreLevelID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6648676846494241504, guid: 960790ed3fa02024697320997501598e, type: 3}
       propertyPath: musicLevelAtStart
