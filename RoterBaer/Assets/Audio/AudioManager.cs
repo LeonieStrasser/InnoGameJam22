@@ -36,7 +36,9 @@ public class AudioManager : MonoBehaviour
         SFXBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
 
         MusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Music");
+        MusicInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(Vector3.zero));
         AmbientInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Ambient");
+        AmbientInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(Vector3.zero));
     }
 
     //General-----------------
@@ -183,13 +185,13 @@ public class AudioManager : MonoBehaviour
                 CharacterScareInstance.setParameterByName("CharacterType", 2);
                 break;
             case EPassengerType.WeirdGirl:
-                CharacterScareInstance.setParameterByName("CharacterType", 1);
+                CharacterScareInstance.setParameterByName("CharacterType", 3);
                 break;
             case EPassengerType.Grandpa:
                 CharacterScareInstance.setParameterByName("CharacterType", 2);
                 break;
             case EPassengerType.GigaChad:
-                CharacterScareInstance.setParameterByName("CharacterType", 3);
+                CharacterScareInstance.setParameterByName("CharacterType", 1);
                 break;
             default:
                 Debug.LogError($"{nameof(CharacterScare)} is UNDEFINED for {passenger.PassengerType}.", this);
@@ -230,6 +232,7 @@ public class AudioManager : MonoBehaviour
     public void CharacterIdleInitialize(Passenger passenger)
     {
         EventInstance CharacterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spatialized/CharacterIdle");
+        CharacterIdleInstance.setParameterByName("CharacterType", (int)passenger.PassengerType);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(CharacterIdleInstance, passenger.transform, passenger.GetComponent<Rigidbody>());
         CharacterIdleInstance.start();
 
@@ -265,7 +268,9 @@ public class AudioManager : MonoBehaviour
 
     public void MonsterIdleInitialize(MonsterActivator monster)
     {
+        //Debug.LogError("Monster Initialized");
         EventInstance MonsterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spatialized/MonsterIdle");
+        MonsterIdleInstance.setParameterByName("MonsterType", (int)monster.MyType);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(MonsterIdleInstance, monster.transform, monster.GetComponent<Rigidbody>());
         MonsterIdleInstance.start();
 
