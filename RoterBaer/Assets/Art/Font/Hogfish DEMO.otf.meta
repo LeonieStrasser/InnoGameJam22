@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c8660996f599234a837077737c22fc8
+guid: d9541e466ed975e4a9d734102d498513
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Crab Trap Demo
+  - Hogfish DEMO
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
