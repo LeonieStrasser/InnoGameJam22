@@ -7,11 +7,16 @@ public class CollisionTrigger : MonoBehaviour
     public bool QuitTrigger;
     public bool cameraChangerLevel;
     public bool cameraChangerCredits;
+    public bool objectChange;
 
 
     bool inLevelMenu = false;
     [SerializeField] Animator camAnimator;
     [SerializeField] GameObject levelButtons;
+
+    [Space(30)]
+    [SerializeField] GameObject desableObject;
+    [SerializeField] GameObject enableObject;
 
     private void Start()
     {
@@ -44,20 +49,16 @@ public class CollisionTrigger : MonoBehaviour
 
         else if (cameraChangerCredits)
         {
-            if (!inLevelMenu)
-            {
-                camAnimator.SetTrigger("levelCam");
-                StartCoroutine(buttonBlendIn());
-                inLevelMenu = true;
-            }
 
-            else
-            {
-                camAnimator.SetTrigger("menuCam");
-                levelButtons.SetActive(false);
-                inLevelMenu = false;
-            }
+            camAnimator.SetTrigger("creditCam");
+            AudioManager.instance.MusicSetLevel(10);
 
+
+        }
+        else if (objectChange)
+        {
+            desableObject.SetActive(false);
+            enableObject.SetActive(true);
         }
 
 
