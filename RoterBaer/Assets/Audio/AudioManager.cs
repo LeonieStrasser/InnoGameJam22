@@ -30,18 +30,13 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-
-    }
-
-    private void Start()
-    {
+        
         EnvEmittersBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus/EnvEmitterBus");
         MusicBus = FMODUnity.RuntimeManager.GetBus("bus:/MusicBus");
         SFXBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
 
         MusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Music");
         AmbientInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Ambient");
-
     }
 
     //General-----------------

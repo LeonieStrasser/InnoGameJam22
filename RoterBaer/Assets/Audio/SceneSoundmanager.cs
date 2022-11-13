@@ -6,7 +6,7 @@ public class SceneSoundmanager : MonoBehaviour
 {
     [SerializeField] int musicLevelAtStart = -1;
 
-    private void Awake()
+    private void Start()
     {
         if (musicLevelAtStart < 0)
         {
