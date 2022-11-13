@@ -116,8 +116,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <Highscore>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 61fddb11a449e044bbb05ca9888b114b, type: 2}
+  m_sharedMaterial: {fileID: 615763936116808732, guid: 61fddb11a449e044bbb05ca9888b114b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -251,8 +251,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <Score>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 61fddb11a449e044bbb05ca9888b114b, type: 2}
+  m_sharedMaterial: {fileID: 615763936116808732, guid: 61fddb11a449e044bbb05ca9888b114b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -464,6 +464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa7d9da268cb604681ab12cd71d37f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highscoreLevelID: 0
+  highscoreList: {fileID: 0}
   highscoreText: {fileID: 3814689868840365953}
   bestScoreText: {fileID: 4487338622473273364}
   boredPoints: -10
@@ -515,7 +517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c260c75cce5a24992f1f536a792f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambientActive: 1
   musicLevelAtStart: -1
 --- !u!1 &4329731742776841562
 GameObject:

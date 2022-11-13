@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1510172897fc7bf4aa4275d1c8a8a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myType: 1
+  myType: 2
   cartsInRange: []
   scareRangeVFX: {fileID: 8921138851035748582}
 --- !u!1 &8921138851035748582
