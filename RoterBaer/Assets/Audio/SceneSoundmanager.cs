@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SceneSoundmanager : MonoBehaviour
 {
-    [SerializeField] bool ambientActive;
-
     [SerializeField] int musicLevelAtStart = -1;
 
     private void Awake()
@@ -13,11 +11,10 @@ public class SceneSoundmanager : MonoBehaviour
         if (musicLevelAtStart < 0) return;
 
         AudioManager.instance.MusicSetLevel(musicLevelAtStart);
-        AudioManager.instance.MusicStart();
+        AudioManager.instance.AmbientSetLevel(musicLevelAtStart);
 
-        if (ambientActive)
-            AudioManager.instance.AmbientStart();
-        else
-            AudioManager.instance.AmbientStop();
+        AudioManager.instance.MusicStart();
+        AudioManager.instance.AmbientStart();
+
     }
 }

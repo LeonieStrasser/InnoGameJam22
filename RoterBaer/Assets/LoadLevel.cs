@@ -9,6 +9,7 @@ public class LoadLevel : MonoBehaviour
 
     public void Load()
     {
+        AudioManager.instance.MenuButtonAccept();
         SceneManager.LoadSceneAsync(loadedLevelName);
     }
 }

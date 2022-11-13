@@ -165,31 +165,13 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsNegative");
     }
 
-    public void MonsterScare(MonsterActivator monster)
+    public void MonsterScare(EMonsterType monsterType)
     {
         EventInstance MonsterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/MonsterScare");
-        MonsterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(monster.gameObject));
+        //MonsterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(monster.gameObject));
 
-        switch (monster.MyType)
-        {
-            case EMonsterType.BONUSMONSTER:
-                MonsterScareInstance.setParameterByName("MonsterType", 1);
-                break;
-            case EMonsterType.Benjee:
-                MonsterScareInstance.setParameterByName("MonsterType", 2);
-                break;
-            case EMonsterType.Fritzi:
-                MonsterScareInstance.setParameterByName("MonsterType", 3);
-                break;
-            case EMonsterType.Axtor:
-                MonsterScareInstance.setParameterByName("MonsterType", 4);
-                break;
-
-            default:
-                Debug.LogError($"{nameof(MonsterScare)} is UNDEFINED for {monster.MyType}.", this);
-                break;
-        }
-
+        MonsterScareInstance.setParameterByName("MonsterType", (int)monsterType);
+        
         MonsterScareInstance.start();
         MonsterScareInstance.release();
     }

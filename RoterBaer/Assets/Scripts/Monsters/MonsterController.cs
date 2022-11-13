@@ -103,6 +103,7 @@ public class MonsterController : MonoBehaviour
             default:
                 break;
         }
+        AudioManager.instance.MonsterScare(monsterType);
     }
 
     public List<MonsterActivator> GetMonsters(EMonsterType monsterType)

@@ -85,6 +85,11 @@ public class TrackGate : TrackPoint
         {
             nextExit = neighbors[nextID];
             NextExitChangedEvent?.Invoke();
+
+            if(gateType == ETrackGateType.Iterating)
+                AudioManager.instance.SwitchAuto(transform.position);
+            else if(gateType == ETrackGateType.Player1 || gateType == ETrackGateType.Player2)
+                AudioManager.instance.SwitchPlayer(transform.position);
         }
         else
             Debug.LogWarning($"[{GetType().Name}] Gate couldn't be set different than old value of {neighbors[nextID]}", this);

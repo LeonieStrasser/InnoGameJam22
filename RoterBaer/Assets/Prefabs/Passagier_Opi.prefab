@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 5959603055805103823}
   - component: {fileID: 8720868203463691661}
   m_Layer: 2
-  m_Name: PassagierOpi
+  m_Name: Passagier_Opi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4871,7 +4871,7 @@ MonoBehaviour:
   standardScariness: 0.4
   scarinessOfMonsters: []
   imageAnim: {fileID: 5455456754152669675}
-  endOfBoredLevel: 0.1
+  endOfBoredLevel: 0
   littleScaredLevel: 0.206
   scaredLevel: 0.577
   zzzVfx: {fileID: 1808948267}

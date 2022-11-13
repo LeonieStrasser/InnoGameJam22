@@ -5,6 +5,7 @@ using UnityEngine;
 public class HighscoreCounter : MonoBehaviour
 {
     [SerializeField] int highscoreLevelID;
+    [SerializeField] HighscoreListVisual highscoreList;
 
     const int TRACKED_HIGHSCORES = 10;
     const string PREFAB_HIGHSCORE = "HighScore_Level{0}_Rank{1}";
@@ -71,6 +72,14 @@ public class HighscoreCounter : MonoBehaviour
 
     public void PassengerLeft(Passenger passenger)
     {
+        int addedPoint = ScareLevelPoints(passenger.ScareLevel);
+
+        if (addedPoint > 0)
+            AudioManager.instance.PointsPositive();
+        else if (addedPoint < 0)
+            AudioManager.instance.PointsNegative();
+
+
         Highscore = Mathf.Max(0, Highscore + ScareLevelPoints(passenger.ScareLevel));
     }
 
