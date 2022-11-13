@@ -4600,7 +4600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6789358132005336415, guid: f44b0bb5b45bde44998dc81449817f65, type: 3}
       propertyPath: loadedLevelName
-      value: Level_confusing
+      value: Level_medium
       objectReference: {fileID: 0}
     - target: {fileID: 7263670556038321282, guid: f44b0bb5b45bde44998dc81449817f65, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
@@ -8550,6 +8550,10 @@ PrefabInstance:
     - target: {fileID: 6217704178149460163, guid: 960790ed3fa02024697320997501598e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524054381889668254, guid: 960790ed3fa02024697320997501598e, type: 3}
+      propertyPath: roundLengthSeconds
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 960790ed3fa02024697320997501598e, type: 3}

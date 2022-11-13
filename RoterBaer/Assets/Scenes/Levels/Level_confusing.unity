@@ -3213,6 +3213,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6524054381889668254, guid: 960790ed3fa02024697320997501598e, type: 3}
+      propertyPath: highscoreLevelID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6648676846494241504, guid: 960790ed3fa02024697320997501598e, type: 3}
       propertyPath: musicLevelAtStart
       value: 2
