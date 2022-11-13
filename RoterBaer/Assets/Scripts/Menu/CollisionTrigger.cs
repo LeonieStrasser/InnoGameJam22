@@ -42,6 +42,24 @@ public class CollisionTrigger : MonoBehaviour
 
         }
 
+        else if (cameraChangerCredits)
+        {
+            if (!inLevelMenu)
+            {
+                camAnimator.SetTrigger("levelCam");
+                StartCoroutine(buttonBlendIn());
+                inLevelMenu = true;
+            }
+
+            else
+            {
+                camAnimator.SetTrigger("menuCam");
+                levelButtons.SetActive(false);
+                inLevelMenu = false;
+            }
+
+        }
+
 
 
     }
