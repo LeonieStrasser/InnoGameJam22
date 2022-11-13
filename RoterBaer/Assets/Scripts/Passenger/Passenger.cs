@@ -87,17 +87,20 @@ public class Passenger : MonoBehaviour
             myScareLevel = EPassengerMode.littleScared;
             imageAnim.SetTrigger("scream");
             imageAnim.SetBool("littleScared", true);
+            zzzVfx.SetActive(false);
         }
         else if (scareValue > scaredLevel && scareValue < 1)
         {
             myScareLevel = EPassengerMode.scared;
             imageAnim.SetTrigger("scream");
             imageAnim.SetBool("scared", true);
+            zzzVfx.SetActive(false);
         }
         else if (scareValue >= 1)
         {
             myScareLevel = EPassengerMode.despawn;
             imageAnim.SetBool("despawn", true);
+            zzzVfx.SetActive(false);
             dead = true;
         }
     }

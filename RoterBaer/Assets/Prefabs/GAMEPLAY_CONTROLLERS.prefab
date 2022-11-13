@@ -562,10 +562,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenCarts: 1
-  cartLimit: 4
+  cartLimit: 5
   prefabVisitorCart: {fileID: 2763566969840124966, guid: 5a33c0d953923bf49b16f51154ddb4cf, type: 3}
   prefabPassenger:
+  - {fileID: 5613144874872135240, guid: 5e6d647658aaf9b47815c9cc67855728, type: 3}
   - {fileID: 8720868203463691661, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
+  - {fileID: 6722428969976147321, guid: 4dc092b3453c47848bad0b44339714b9, type: 3}
 --- !u!1 &4632360300391378585
 GameObject:
   m_ObjectHideFlags: 0

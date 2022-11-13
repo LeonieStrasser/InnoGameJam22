@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 5959603055805103823}
   - component: {fileID: 8720868203463691661}
   m_Layer: 2
-  m_Name: Passagier
+  m_Name: PassagierOpi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4867,13 +4867,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c305db68fee85e40a691e5e0fbb73a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passengerType: 0
-  standardScariness: 0.2
+  passengerType: 2
+  standardScariness: 0.4
   scarinessOfMonsters: []
   imageAnim: {fileID: 5455456754152669675}
   endOfBoredLevel: 0.1
-  littleScaredLevel: 0.5
-  scaredLevel: 0.7
+  littleScaredLevel: 0.206
+  scaredLevel: 0.577
   zzzVfx: {fileID: 1808948267}
 --- !u!1 &1996047120370618722
 GameObject:
