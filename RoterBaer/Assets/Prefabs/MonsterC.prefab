@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 3079215796367401727}
   - component: {fileID: 5274614698971286896}
   m_Layer: 0
-  m_Name: image (3)
+  m_Name: image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 6115030493839988053}
   - component: {fileID: 5358500061256805010}
   m_Layer: 0
-  m_Name: trail (1)
+  m_Name: trail (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
