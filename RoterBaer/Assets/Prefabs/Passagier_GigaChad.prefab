@@ -9,12 +9,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 679664472971560230, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
       propertyPath: m_Name
-      value: Passagier GigaJet
+      value: Passagier_GigaChad
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058456360587748118, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
+      propertyPath: m_Size.x
+      value: 25.261703
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058456360587748118, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
+      propertyPath: m_Size.y
+      value: 38.87
       objectReference: {fileID: 0}
     - target: {fileID: 2058456360587748118, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d4ca3bb17d2dbec43a74cfe52b480f5f, type: 3}
+      objectReference: {fileID: 21300000, guid: 34ec6fc1f9ffa35439c9170f8d80be31, type: 3}
     - target: {fileID: 5959603055805103823, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
       propertyPath: m_RootOrder
       value: 0

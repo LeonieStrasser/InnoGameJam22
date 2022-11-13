@@ -9,12 +9,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 679664472971560230, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
       propertyPath: m_Name
-      value: PassagierWendsday
+      value: Passagier_Wendsday
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058456360587748118, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
+      propertyPath: m_Size.x
+      value: 19.950205
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058456360587748118, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
+      propertyPath: m_Size.y
+      value: 34.019997
       objectReference: {fileID: 0}
     - target: {fileID: 2058456360587748118, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8da149b8acf0d9d4281452dc70ce6614, type: 3}
+      objectReference: {fileID: 21300000, guid: fe202d4da92a746499326c591e490487, type: 3}
     - target: {fileID: 5959603055805103823, guid: 57235ea6e0345254693d67af18cc087a, type: 3}
       propertyPath: m_RootOrder
       value: 0
