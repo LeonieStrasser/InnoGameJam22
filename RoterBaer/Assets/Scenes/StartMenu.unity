@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 69769565}
   - component: {fileID: 69769564}
   m_Layer: 0
-  m_Name: changerTrigger (2)
+  m_Name: creditsEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -476,7 +476,8 @@ MonoBehaviour:
   QuitTrigger: 0
   cameraChangerLevel: 0
   cameraChangerCredits: 0
-  objectChange: 1
+  objectChange: 0
+  credutsEnd: 1
   camAnimator: {fileID: 2083063270}
   levelButtons: {fileID: 1353253327}
   desableObject: {fileID: 0}
@@ -502,7 +503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69769563}
   m_LocalRotation: {x: -0, y: -0, z: -0.8790909, w: 0.47665405}
-  m_LocalPosition: {x: 1.57, y: 3.84, z: 0}
+  m_LocalPosition: {x: 1.35, y: 3.36, z: 0}
   m_LocalScale: {x: 3.1473978, y: 1.4506675, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1428,6 +1429,7 @@ MonoBehaviour:
   cameraChangerLevel: 1
   cameraChangerCredits: 0
   objectChange: 0
+  credutsEnd: 0
   camAnimator: {fileID: 2083063270}
   levelButtons: {fileID: 1353253327}
   desableObject: {fileID: 0}
@@ -4222,6 +4224,7 @@ MonoBehaviour:
   cameraChangerLevel: 0
   cameraChangerCredits: 0
   objectChange: 1
+  credutsEnd: 0
   camAnimator: {fileID: 2083063270}
   levelButtons: {fileID: 1353253327}
   desableObject: {fileID: 1741160815}
@@ -4940,6 +4943,7 @@ MonoBehaviour:
   cameraChangerLevel: 0
   cameraChangerCredits: 0
   objectChange: 0
+  credutsEnd: 0
   camAnimator: {fileID: 0}
   levelButtons: {fileID: 0}
   desableObject: {fileID: 0}
@@ -6036,6 +6040,7 @@ MonoBehaviour:
   cameraChangerLevel: 0
   cameraChangerCredits: 0
   objectChange: 1
+  credutsEnd: 0
   camAnimator: {fileID: 2083063270}
   levelButtons: {fileID: 1353253327}
   desableObject: {fileID: 1951762630}
@@ -11223,6 +11228,7 @@ MonoBehaviour:
   cameraChangerLevel: 0
   cameraChangerCredits: 1
   objectChange: 0
+  credutsEnd: 0
   camAnimator: {fileID: 2083063270}
   levelButtons: {fileID: 1353253327}
   desableObject: {fileID: 0}

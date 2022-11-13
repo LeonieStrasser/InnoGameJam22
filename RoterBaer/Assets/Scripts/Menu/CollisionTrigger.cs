@@ -8,6 +8,7 @@ public class CollisionTrigger : MonoBehaviour
     public bool cameraChangerLevel;
     public bool cameraChangerCredits;
     public bool objectChange;
+    public bool credutsEnd;
 
 
     bool inLevelMenu = false;
@@ -57,8 +58,15 @@ public class CollisionTrigger : MonoBehaviour
         }
         else if (objectChange)
         {
-            desableObject.SetActive(false);
+            if (desableObject != null)
+                desableObject.SetActive(false);
+            if(enableObject != null)
             enableObject.SetActive(true);
+        }
+        else if (credutsEnd)
+        {
+            enableObject.SetActive(true);
+            AudioManager.instance.MusicSetLevel(0);
         }
 
 
