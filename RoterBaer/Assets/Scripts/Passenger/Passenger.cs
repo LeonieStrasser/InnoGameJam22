@@ -26,6 +26,8 @@ public class Passenger : MonoBehaviour
     [SerializeField] [Range(0, 1)] float scaredLevel;
     [Space(10)]
     [SerializeField] GameObject zzzVfx;
+    [SerializeField] float lookAroundMin = 5;
+    [SerializeField] float lookAroundMax = 10;
 
     private float stressLevel = 0;
     public float StressLevel
@@ -53,15 +55,29 @@ public class Passenger : MonoBehaviour
     EPassengerMode myScareLevel = EPassengerMode.bored;
     public EPassengerMode ScareLevel => myScareLevel;
 
+    float nextFlipTime;
+
     private void Awake()
     {
         AudioManager.instance.CharacterIdleInitialize(this);
+        nextFlipTime = Random.Range(lookAroundMin, lookAroundMax);
     }
 
     private void OnDestroy()
     {
         if (!dead)
             AudioManager.instance.CharacterIdleRetirement(this);
+    }
+
+    private void Update()
+    {
+        nextFlipTime -= Time.deltaTime;
+
+        if (nextFlipTime <= 0)
+        {
+            FlipPassenger();
+            nextFlipTime = Random.Range(lookAroundMin / ((int)myScareLevel + 1), lookAroundMax / ((int)myScareLevel + 1));
+        }
     }
 
     public void ScarePassenger(EMonsterType monsterType)
@@ -83,6 +99,13 @@ public class Passenger : MonoBehaviour
 
             AudioManager.instance.CharacterScare(this);
         }
+    }
+
+    private void FlipPassenger()
+    {
+        var temp = transform.parent.localScale;
+        temp.x = -temp.x;
+        transform.parent.localScale = temp;
     }
 
     void SetScareLevel(float scareValue)

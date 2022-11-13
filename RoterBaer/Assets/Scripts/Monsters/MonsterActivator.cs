@@ -91,12 +91,12 @@ public class MonsterActivator : MonoBehaviour
 
         if (isHovered)
         {
-            transform.localScale *= 1.1f;
+            transform.localScale *= 1.05f;
             scareRangeVFX?.SetActive(true);
         }
         else
         {
-            transform.localScale /= 1.1f;
+            transform.localScale /= 1.05f;
             scareRangeVFX?.SetActive(false);
         }
 
