@@ -92,12 +92,12 @@ public class MonsterActivator : MonoBehaviour
         if (isHovered)
         {
             transform.localScale *= 1.1f;
-            scareRangeVFX.SetActive(true);
+            scareRangeVFX?.SetActive(true);
         }
         else
         {
             transform.localScale /= 1.1f;
-            scareRangeVFX.SetActive(false);
+            scareRangeVFX?.SetActive(false);
         }
 
         foreach (var cart in cartsInRange)

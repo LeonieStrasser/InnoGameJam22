@@ -8,13 +8,16 @@ public class SceneSoundmanager : MonoBehaviour
 
     private void Awake()
     {
-        if (musicLevelAtStart < 0) return;
-
-        AudioManager.instance.MusicSetLevel(musicLevelAtStart);
-        AudioManager.instance.AmbientSetLevel(musicLevelAtStart);
+        if (musicLevelAtStart < 0)
+        {
+            Debug.LogWarning("[SceneSoundmanager] Musiklevel set below zero!", this);
+            return;
+        }
 
         AudioManager.instance.MusicStart();
         AudioManager.instance.AmbientStart();
 
+        AudioManager.instance.MusicSetLevel(musicLevelAtStart);
+        AudioManager.instance.AmbientSetLevel(musicLevelAtStart);
     }
 }

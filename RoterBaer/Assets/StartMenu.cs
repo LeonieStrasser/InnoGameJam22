@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StartMenu : MonoBehaviour
-{
-    private void Awake()
-    {
-        AudioManager.instance.MusicStart();
-    }
-    
+{    
     public static void Quit()
     {
         AudioManager.instance.MenuButtonAccept();
