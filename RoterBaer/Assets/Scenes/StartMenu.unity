@@ -12824,6 +12824,10 @@ PrefabInstance:
       propertyPath: roundLengthSeconds
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 6648676846494241504, guid: 960790ed3fa02024697320997501598e, type: 3}
+      propertyPath: musicLevelAtStart
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 960790ed3fa02024697320997501598e, type: 3}
 --- !u!1 &1886797622
@@ -13988,8 +13992,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2083063269}
   - component: {fileID: 2083063268}
-  - component: {fileID: 2083063267}
   - component: {fileID: 2083063270}
+  - component: {fileID: 2083063271}
   m_Layer: 0
   m_Name: Main Camera (1)
   m_TagString: MainCamera
@@ -13997,14 +14001,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2083063267
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083063266}
-  m_Enabled: 1
 --- !u!20 &2083063268
 Camera:
   m_ObjectHideFlags: 0
@@ -14083,6 +14079,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2083063271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083063266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &2119962838
 GameObject:
   m_ObjectHideFlags: 0

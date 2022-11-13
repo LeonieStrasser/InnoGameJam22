@@ -27,12 +27,18 @@ public class MonsterActivator : MonoBehaviour
         monsterHUB = FindObjectOfType<MonsterController>();
         cartsInRange = new List<VisitorCart>();
         anim = GetComponentInChildren<Animator>();
+
+        AudioManager.instance.MonsterIdleInitialize(this);
     }
     private void Start()
     {
         monsterHUB.AddMonsterToLists(this);
     }
 
+    private void OnDestroy()
+    {
+        AudioManager.instance.MonsterIdleRetirement(this);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -91,12 +97,12 @@ public class MonsterActivator : MonoBehaviour
 
         if (isHovered)
         {
-            transform.localScale *= 1.1f;
+            transform.localScale *= 1.05f;
             scareRangeVFX?.SetActive(true);
         }
         else
         {
-            transform.localScale /= 1.1f;
+            transform.localScale /= 1.05f;
             scareRangeVFX?.SetActive(false);
         }
 
