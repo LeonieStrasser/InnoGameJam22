@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c260c75cce5a24992f1f536a792f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicLevelAtStart: -1
+  musicLevelAtStart: 1
 --- !u!1 &4223312402189112182
 GameObject:
   m_ObjectHideFlags: 0
