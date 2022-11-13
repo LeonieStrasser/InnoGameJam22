@@ -41,12 +41,13 @@ public class Passenger : MonoBehaviour
 
     public enum EPassengerMode
     {
-        bored,
-        normal,
-        littleScared,
-        scared,
-        despawn
+        bored = 0,
+        normal = 1,
+        littleScared = 2,
+        scared = 3,
+        despawn = 4
     }
+
     bool dead = false;
 
     EPassengerMode myScareLevel = EPassengerMode.bored;

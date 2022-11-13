@@ -198,16 +198,16 @@ public class AudioManager : MonoBehaviour
 
         switch (monster.MyType)
         {
-            case EMonsterType.MonsterA:
+            case EMonsterType.BONUSMONSTER:
                 MonsterScareInstance.setParameterByName("MonsterType", 1);            
                 break;
-            case EMonsterType.MonsterB:
+            case EMonsterType.Benjee:
                 MonsterScareInstance.setParameterByName("MonsterType", 2);
                 break;
-            case EMonsterType.MonsterC:
+            case EMonsterType.Fritzi:
                 MonsterScareInstance.setParameterByName("MonsterType", 3);
                 break;
-            case EMonsterType.MonsterD:
+            case EMonsterType.Axtor:
                 MonsterScareInstance.setParameterByName("MonsterType", 4);
                 break;
 
