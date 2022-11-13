@@ -6,7 +6,7 @@ public class HighscoreCounter : MonoBehaviour
 {
     [SerializeField] int highscoreLevelID;
     [SerializeField] float roundLengthSeconds = 60;
-    float currentRoundLength = 0;
+    float remainingTime = 0;
     bool gameEnded = false;
 
     [Space]
@@ -48,6 +48,8 @@ public class HighscoreCounter : MonoBehaviour
 
     [SerializeField] TMPro.TMP_Text highscoreText;
     [SerializeField] TMPro.TMP_Text bestScoreText;
+    [SerializeField] TMPro.TMP_Text timer;
+
 
     float biggerTextSize;
     float smallerTextSize;
@@ -71,7 +73,10 @@ public class HighscoreCounter : MonoBehaviour
         else
             BestHighscore = currentHighscore;
 
-        if (roundLengthSeconds <= 0) enabled = false;
+        if (roundLengthSeconds <= 0)
+            enabled = false;
+        else
+            remainingTime = roundLengthSeconds;
     }
 
     private void OnDestroy()
@@ -81,13 +86,16 @@ public class HighscoreCounter : MonoBehaviour
 
     private void Update()
     {
-        currentRoundLength += Time.deltaTime;
+        remainingTime -= Time.deltaTime;
 
-        if (currentRoundLength > roundLengthSeconds)
+        if (remainingTime <= 0)
         {
             Endgame();
             enabled = false;
+            timer.enabled = false;
         }
+
+        timer.text = Mathf.Round(remainingTime).ToString();
     }
 
     public void PassengerLeft(Passenger passenger)
