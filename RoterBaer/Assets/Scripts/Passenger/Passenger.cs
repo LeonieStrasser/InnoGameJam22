@@ -41,16 +41,28 @@ public class Passenger : MonoBehaviour
 
     public enum EPassengerMode
     {
-        bored,
-        normal,
-        littleScared,
-        scared,
-        despawn
+        bored = 0,
+        normal = 1,
+        littleScared = 2,
+        scared = 3,
+        despawn = 4
     }
+
     bool dead = false;
 
     EPassengerMode myScareLevel = EPassengerMode.bored;
     public EPassengerMode ScareLevel => myScareLevel;
+
+    private void Awake()
+    {
+        AudioManager.instance.CharacterIdleInitialize(this);
+    }
+
+    private void OnDestroy()
+    {
+        if (!dead)
+            AudioManager.instance.CharacterIdleRetirement(this);
+    }
 
     public void ScarePassenger(EMonsterType monsterType)
     {
@@ -68,19 +80,21 @@ public class Passenger : MonoBehaviour
             }
 
             StressLevel += monsterSpecificScariness;
-        }
 
+            AudioManager.instance.CharacterScare(this);
+        }
     }
 
     void SetScareLevel(float scareValue)
     {
+        EPassengerMode oldScareLevel = myScareLevel;
+
         if (scareValue > endOfBoredLevel && scareValue < littleScaredLevel)
         {
             myScareLevel = EPassengerMode.normal;
             imageAnim.SetBool("normal", true);
             imageAnim.SetTrigger("scream");
             zzzVfx.SetActive(false);
-
         }
         else if (scareValue > littleScaredLevel && scareValue < scaredLevel)
         {
@@ -102,7 +116,12 @@ public class Passenger : MonoBehaviour
             imageAnim.SetBool("despawn", true);
             zzzVfx.SetActive(false);
             dead = true;
+
+            AudioManager.instance.CharacterIdleRetirement(this);
         }
+
+        if (!dead && oldScareLevel != myScareLevel)
+            AudioManager.instance.CharacterIdleStatusUpdate(this);
     }
 
 }

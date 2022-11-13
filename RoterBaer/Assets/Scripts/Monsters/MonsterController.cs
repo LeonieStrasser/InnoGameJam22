@@ -35,19 +35,19 @@ public class MonsterController : MonoBehaviour
     {
         if(Input.GetKeyDown(activateInputA))
         {
-            SetMonsterListScareActive(EMonsterType.MonsterA);
+            SetMonsterListScareActive(EMonsterType.BONUSMONSTER);
         }
         if (Input.GetKeyDown(activateInputB))
         {
-            SetMonsterListScareActive(EMonsterType.MonsterB);
+            SetMonsterListScareActive(EMonsterType.Benjee);
         }
         if (Input.GetKeyDown(activateInputC))
         {
-            SetMonsterListScareActive(EMonsterType.MonsterC);
+            SetMonsterListScareActive(EMonsterType.Fritzi);
         }
         if (Input.GetKeyDown(activateInputD))
         {
-            SetMonsterListScareActive(EMonsterType.MonsterD);
+            SetMonsterListScareActive(EMonsterType.Axtor);
         }
     }
 
@@ -55,16 +55,16 @@ public class MonsterController : MonoBehaviour
     {
         switch (newMonster.MyType)
         {
-            case EMonsterType.MonsterA:
+            case EMonsterType.BONUSMONSTER:
                 monstersA.Add(newMonster);
                 break;
-            case EMonsterType.MonsterB:
+            case EMonsterType.Benjee:
                 monstersB.Add(newMonster);
                 break;
-            case EMonsterType.MonsterC:
+            case EMonsterType.Fritzi:
                 monstersC.Add(newMonster);
                 break;
-            case EMonsterType.MonsterD:
+            case EMonsterType.Axtor:
                 monstersD.Add(newMonster);
                 break;
             default:
@@ -76,25 +76,25 @@ public class MonsterController : MonoBehaviour
     {
         switch (monsterType)
         {
-            case EMonsterType.MonsterA:
+            case EMonsterType.BONUSMONSTER:
                 foreach (var item in monstersA)
                 {
                     item.ActivateScare();
                 }
                 break;
-            case EMonsterType.MonsterB:
+            case EMonsterType.Benjee:
                 foreach (var item in monstersB)
                 {
                     item.ActivateScare();
                 }
                 break;
-            case EMonsterType.MonsterC:
+            case EMonsterType.Fritzi:
                 foreach (var item in monstersC)
                 {
                     item.ActivateScare();
                 }
                 break;
-            case EMonsterType.MonsterD:
+            case EMonsterType.Axtor:
                 foreach (var item in monstersD)
                 {
                     item.ActivateScare();
@@ -103,19 +103,20 @@ public class MonsterController : MonoBehaviour
             default:
                 break;
         }
+        AudioManager.instance.MonsterScare(monsterType);
     }
 
     public List<MonsterActivator> GetMonsters(EMonsterType monsterType)
     {
         switch (monsterType)
         {
-            case EMonsterType.MonsterA:
+            case EMonsterType.BONUSMONSTER:
                 return monstersA;
-            case EMonsterType.MonsterB:
+            case EMonsterType.Benjee:
                 return monstersB;
-            case EMonsterType.MonsterC:
+            case EMonsterType.Fritzi:
                 return monstersC;
-            case EMonsterType.MonsterD:
+            case EMonsterType.Axtor:
                 return monstersD;
 
             default:

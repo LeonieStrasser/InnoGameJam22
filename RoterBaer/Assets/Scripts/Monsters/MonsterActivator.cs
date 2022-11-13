@@ -11,6 +11,9 @@ public class MonsterActivator : MonoBehaviour
     [SerializeField] List<VisitorCart> cartsInRange;
     MonsterController monsterHUB;
 
+    [Space(20)]
+    [SerializeField] GameObject scareRangeVFX;
+
     public Vector3 Position => transform.position;
 
     Animator anim;
@@ -39,6 +42,7 @@ public class MonsterActivator : MonoBehaviour
             cartsInRange.Add(nextCart);
 
             nextCart.IsScareEndangered(isHovered);
+
         }
     }
 
@@ -59,8 +63,6 @@ public class MonsterActivator : MonoBehaviour
 
         foreach (var cart in cartsInRange)
             cart.GetComponent<VisitorCart>()?.ScarePassengers(myType);
-
-        AudioManager.instance.MonsterScare(this);
     }
 
     private void OnMouseDown()
@@ -72,6 +74,7 @@ public class MonsterActivator : MonoBehaviour
     {
         foreach (var monster in MonsterController.Active.GetMonsters(myType))
             monster.SetHovered(true);
+
     }
 
     private void OnMouseExit()
@@ -87,9 +90,15 @@ public class MonsterActivator : MonoBehaviour
         this.isHovered = isHovered;
 
         if (isHovered)
+        {
             transform.localScale *= 1.1f;
+            scareRangeVFX?.SetActive(true);
+        }
         else
+        {
             transform.localScale /= 1.1f;
+            scareRangeVFX?.SetActive(false);
+        }
 
         foreach (var cart in cartsInRange)
             cart.IsScareEndangered(isHovered);

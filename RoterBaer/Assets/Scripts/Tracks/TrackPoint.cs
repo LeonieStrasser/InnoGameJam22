@@ -129,6 +129,12 @@ public class TrackPoint : MonoBehaviour
         UnityEditor.EditorUtility.SetDirty(this);
 #endif
     }
+
+    public void SetupLineRenderer()
+    {
+        LineRenderer[] geLines = GetComponentsInChildren<LineRenderer>();
+
+    }
     #endregion Development
 }
 
