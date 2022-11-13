@@ -162,8 +162,8 @@ public class AudioManager : MonoBehaviour
 
     public void MonsterScare(EMonsterType monsterType)
     {
-        EventInstance MonsterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/MonsterScare");
-        //MonsterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(monster.gameObject));
+        EventInstance MonsterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/MonsterScare");
+        MonsterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(Vector3.zero));
 
         MonsterScareInstance.setParameterByName("MonsterType", (int)monsterType);
         
@@ -173,7 +173,7 @@ public class AudioManager : MonoBehaviour
 
     public void CharacterScare(Passenger passenger)
     {
-        EventInstance CharacterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/CharacterScare");
+        EventInstance CharacterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spatialized/CharacterScare");
         CharacterScareInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(passenger.gameObject));
 
         switch (passenger.PassengerType)
@@ -204,7 +204,7 @@ public class AudioManager : MonoBehaviour
 
     public void WagonInitialize(GameObject Wagon)
     {
-        EventInstance WagonInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/WagonRoll");
+        EventInstance WagonInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spatialized/WagonRoll");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(WagonInstance, Wagon.transform, Wagon.GetComponent<Rigidbody>());
         WagonInstance.start();
         
@@ -229,7 +229,7 @@ public class AudioManager : MonoBehaviour
 
     public void CharacterIdleInitialize(Passenger passenger)
     {
-        EventInstance CharacterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/CharacterIdle");
+        EventInstance CharacterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spatialized/CharacterIdle");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(CharacterIdleInstance, passenger.transform, passenger.GetComponent<Rigidbody>());
         CharacterIdleInstance.start();
 
@@ -265,7 +265,7 @@ public class AudioManager : MonoBehaviour
 
     public void MonsterIdleInitialize(MonsterActivator monster)
     {
-        EventInstance MonsterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/MonsterIdle");
+        EventInstance MonsterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spatialized/MonsterIdle");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(MonsterIdleInstance, monster.transform, monster.GetComponent<Rigidbody>());
         MonsterIdleInstance.start();
 
