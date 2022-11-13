@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class HighscoreCounter : MonoBehaviour
 {
-    const string PREFAB_HIGHSCORE = "HighScore1";
+    [SerializeField] int highscoreLevelID;
+
+    const int TRACKED_HIGHSCORES = 10;
+    const string PREFAB_HIGHSCORE = "HighScore_Level{0}_Rank{1}";
 
     public static HighscoreCounter Active { get; private set; }
+
+    bool highscoreSaved;
 
     int currentHighscore = 0;
     public int Highscore
@@ -53,21 +58,20 @@ public class HighscoreCounter : MonoBehaviour
         // to initialise text field
         Highscore = currentHighscore;
 
-        if (PlayerPrefs.HasKey(PREFAB_HIGHSCORE))
-            BestHighscore = PlayerPrefs.GetInt(PREFAB_HIGHSCORE);
+        if (PlayerPrefs.HasKey(GetPlayerPrefabKey(highscoreLevelID, 1)))
+            BestHighscore = PlayerPrefs.GetInt(GetPlayerPrefabKey(highscoreLevelID, 1));
         else
             BestHighscore = currentHighscore;
     }
 
     private void OnDestroy()
     {
-        if (!PlayerPrefs.HasKey(PREFAB_HIGHSCORE) || currentHighscore > PlayerPrefs.GetInt(PREFAB_HIGHSCORE))
-            PlayerPrefs.SetInt(PREFAB_HIGHSCORE, currentHighscore);
+        if (!highscoreSaved) SaveHighscore(highscoreLevelID, currentHighscore);
     }
 
     public void PassengerLeft(Passenger passenger)
     {
-        Highscore += ScareLevelPoints(passenger.ScareLevel);
+        Highscore = Mathf.Max(0, Highscore + ScareLevelPoints(passenger.ScareLevel));
     }
 
     private int ScareLevelPoints(Passenger.EPassengerMode scareLevel)
@@ -90,4 +94,36 @@ public class HighscoreCounter : MonoBehaviour
                 return 0;
         }
     }
+
+
+    #region Saving Highscore
+    private static string GetPlayerPrefabKey(int levelID, int rank) => string.Format(PREFAB_HIGHSCORE, levelID, rank);
+
+    private static void SaveHighscore(int levelID, int newScore)
+    {
+        if (newScore <= 0) return;
+
+        List<int> scores = GetHighscores(levelID);
+
+        scores.Add(newScore);
+        scores.Sort();
+
+        for (int pos = 0; pos < Mathf.Min(TRACKED_HIGHSCORES, scores.Count); pos++)
+        {
+            PlayerPrefs.SetInt(GetPlayerPrefabKey(levelID, pos + 1), scores[pos]);
+        }
+    }
+
+    public static List<int> GetHighscores(int levelID)
+    {
+        List<int> scores = new List<int>();
+
+        for (int rank = 1; rank <= TRACKED_HIGHSCORES; rank++)
+        {
+            if (PlayerPrefs.HasKey(GetPlayerPrefabKey(levelID, rank)))
+                scores.Add(PlayerPrefs.GetInt(GetPlayerPrefabKey(levelID, rank)));
+        }
+        return scores;
+    }
+    #endregion Saving Highscore
 }

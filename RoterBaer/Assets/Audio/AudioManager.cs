@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     private Bus SFXBus;
 
     Dictionary<GameObject, EventInstance> wagonToEventInstance = new Dictionary<GameObject, EventInstance>();
+    Dictionary<Passenger, EventInstance> characterToEventInstance = new Dictionary<Passenger, EventInstance>();
+    Dictionary<MonsterActivator, EventInstance> monsterToEventInstance = new Dictionary<MonsterActivator, EventInstance>();
 
     private void Awake()
     {
@@ -41,71 +43,8 @@ public class AudioManager : MonoBehaviour
         AmbientInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Non-Spatialized/Ambient");
 
     }
-    public void SwitchAuto(Vector3 OneShotPosition)
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/SwitchAuto", OneShotPosition);
-    }
-    public void SwitchPlayer(Vector3 OneShotPosition)
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/SwitchPlayer", OneShotPosition);
-    }
-    public void WagonOverTrackpoint(VisitorCart cart)
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/WagonOverTrackpoint", cart.Position);
-    }
 
-    public void MenuButtonAccept()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/MenuButtonAccept");        
-    }
-
-    public void MenuButtonBack()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/MenuButtonBack()");
-    }
-
-    public void PointsPositive()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsPositive");
-    }
-    public void PointsNegative()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsNegative");
-    }
-
-
-    public void WagonInitialize(GameObject Wagon)
-    {
-        EventInstance WagonInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/WagonRoll");
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(WagonInstance, Wagon.transform, Wagon.GetComponent<Rigidbody>());
-        WagonInstance.start();
-        
-
-        wagonToEventInstance.Add(Wagon, WagonInstance);
-    }
-
-
-    public void WagonRetirement(GameObject Wagon)
-    {
-        if (!wagonToEventInstance.ContainsKey(Wagon))
-        {
-            Debug.LogError($"Requested Retirement of unknown wagon {Wagon.gameObject.name}", Wagon);
-            return;
-        }
-        
-        wagonToEventInstance[Wagon].release();
-        wagonToEventInstance[Wagon].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        
-        wagonToEventInstance.Remove(Wagon);
-    }
-
-    public void StopAllEnvEmitters()
-    {
-        //Stops all instances of Enviromental Emitters
-        EnvEmittersBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        wagonToEventInstance.Clear();
-    }
-
+    //General-----------------
     public void PauseMenu()
     {
         EnvEmittersBus.setPaused(true);
@@ -122,7 +61,7 @@ public class AudioManager : MonoBehaviour
         {
             AmbientInstance.start();
         }
-        
+
     }
     public void AmbientStop()
     {
@@ -191,6 +130,41 @@ public class AudioManager : MonoBehaviour
         SFXBus.setVolume(volume);
     }
 
+    //Oneshots-----------------
+
+
+    public void SwitchAuto(Vector3 OneShotPosition)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/SwitchAuto", OneShotPosition);
+    }
+    public void SwitchPlayer(Vector3 OneShotPosition)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/SwitchPlayer", OneShotPosition);
+    }
+    public void WagonOverTrackpoint(VisitorCart cart)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Spatialized/WagonOverTrackpoint", cart.Position);
+    }
+
+    public void MenuButtonAccept()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/MenuButtonAccept");        
+    }
+
+    public void MenuButtonBack()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/MenuButtonBack()");
+    }
+
+    public void PointsPositive()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsPositive");
+    }
+    public void PointsNegative()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsNegative");
+    }
+
     public void MonsterScare(MonsterActivator monster)
     {
         EventInstance MonsterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/MonsterScare");
@@ -198,16 +172,16 @@ public class AudioManager : MonoBehaviour
 
         switch (monster.MyType)
         {
-            case EMonsterType.MonsterA:
-                MonsterScareInstance.setParameterByName("MonsterType", 1);            
+            case EMonsterType.BONUSMONSTER:
+                MonsterScareInstance.setParameterByName("MonsterType", 1);
                 break;
-            case EMonsterType.MonsterB:
+            case EMonsterType.Benjee:
                 MonsterScareInstance.setParameterByName("MonsterType", 2);
                 break;
-            case EMonsterType.MonsterC:
+            case EMonsterType.Fritzi:
                 MonsterScareInstance.setParameterByName("MonsterType", 3);
                 break;
-            case EMonsterType.MonsterD:
+            case EMonsterType.Axtor:
                 MonsterScareInstance.setParameterByName("MonsterType", 4);
                 break;
 
@@ -220,7 +194,6 @@ public class AudioManager : MonoBehaviour
         MonsterScareInstance.release();
     }
 
-    
     public void CharacterScare(Passenger passenger)
     {
         EventInstance CharacterScareInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/CharacterScare");
@@ -249,5 +222,103 @@ public class AudioManager : MonoBehaviour
         CharacterScareInstance.start();
         CharacterScareInstance.release();
     }
-    
+
+    //Enviromental Emitters-----------------
+
+    public void WagonInitialize(GameObject Wagon)
+    {
+        EventInstance WagonInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/WagonRoll");
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(WagonInstance, Wagon.transform, Wagon.GetComponent<Rigidbody>());
+        WagonInstance.start();
+        
+
+        wagonToEventInstance.Add(Wagon, WagonInstance);
+    }
+
+
+    public void WagonRetirement(GameObject Wagon)
+    {
+        if (!wagonToEventInstance.ContainsKey(Wagon))
+        {
+            Debug.LogError($"Requested Retirement of unknown wagon {Wagon.gameObject.name}", Wagon);
+            return;
+        }
+        
+        wagonToEventInstance[Wagon].release();
+        wagonToEventInstance[Wagon].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        
+        wagonToEventInstance.Remove(Wagon);
+    }
+
+    public void CharacterIdleInitialize(Passenger passenger)
+    {
+        EventInstance CharacterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/CharacterIdle");
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(CharacterIdleInstance, passenger.transform, passenger.GetComponent<Rigidbody>());
+        CharacterIdleInstance.start();
+
+
+        characterToEventInstance.Add(passenger, CharacterIdleInstance);
+    }
+
+
+    public void CharacterIdleRetirement(Passenger passenger)
+    {
+        if (!characterToEventInstance.ContainsKey(passenger))
+        {
+            Debug.LogError($"Requested Retirement of unknown passenger {passenger.gameObject.name}", passenger);
+            return;
+        }
+
+        characterToEventInstance[passenger].release();
+        characterToEventInstance[passenger].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        characterToEventInstance.Remove(passenger);
+    }
+
+    public void CharacterIdleStatusUpdate(Passenger passenger)
+    {
+        if (!characterToEventInstance.ContainsKey(passenger))
+        {
+            Debug.LogError($"Requested update of unknown passenger {passenger.gameObject.name}", passenger);
+            return;
+        }
+
+        characterToEventInstance[passenger].setParameterByName("ScareLevel", (int)passenger.ScareLevel);
+    }
+
+    public void MonsterIdleInitialize(MonsterActivator monster)
+    {
+        EventInstance MonsterIdleInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Spazialized/MonsterIdle");
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(MonsterIdleInstance, monster.transform, monster.GetComponent<Rigidbody>());
+        MonsterIdleInstance.start();
+
+
+        monsterToEventInstance.Add(monster, MonsterIdleInstance);
+    }
+
+
+    public void MonsterIdleRetirement(MonsterActivator monster)
+    {
+        if (!monsterToEventInstance.ContainsKey(monster))
+        {
+            Debug.LogError($"Requested Retirement of unknown monster {monster.gameObject.name}", monster);
+            return;
+        }
+
+        monsterToEventInstance[monster].release();
+        monsterToEventInstance[monster].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        monsterToEventInstance.Remove(monster);
+    }
+
+
+
+        public void StopAllEnvEmitters()
+    {
+        //Stops all instances of Enviromental Emitters
+        EnvEmittersBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        wagonToEventInstance.Clear();
+    }
+
+
 }
