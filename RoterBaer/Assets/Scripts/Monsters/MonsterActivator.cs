@@ -27,12 +27,18 @@ public class MonsterActivator : MonoBehaviour
         monsterHUB = FindObjectOfType<MonsterController>();
         cartsInRange = new List<VisitorCart>();
         anim = GetComponentInChildren<Animator>();
+
+        AudioManager.instance.MonsterIdleInitialize(this);
     }
     private void Start()
     {
         monsterHUB.AddMonsterToLists(this);
     }
 
+    private void OnDestroy()
+    {
+        AudioManager.instance.MonsterIdleRetirement(this);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
