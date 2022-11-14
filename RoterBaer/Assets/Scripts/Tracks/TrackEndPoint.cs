@@ -12,7 +12,9 @@ public class TrackEndPoint : TrackPoint
     public override bool IsNeverTarget => startPoint;
 }
 
+#if UNITY_EDITOR
 [UnityEditor.CustomEditor(typeof(TrackEndPoint))]
 public class TrackEndPointEditor : TrackPointEditor
 {
 }
+#endif

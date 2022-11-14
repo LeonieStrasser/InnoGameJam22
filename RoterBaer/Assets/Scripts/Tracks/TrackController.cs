@@ -55,6 +55,7 @@ public class TrackController : MonoBehaviour
 }
 
 
+#if UNITY_EDITOR
 /// <summary>
 /// provides Button to clear all stored data
 /// </summary>
@@ -71,3 +72,5 @@ public class TrackControllerEditor : UnityEditor.Editor
         base.OnInspectorGUI();
     }
 }
+
+#endif

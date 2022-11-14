@@ -74,6 +74,10 @@ public class CollisionTrigger : MonoBehaviour
     }
     void Quit()
     {
+        Debug.Log("Quit Game");
+
+        AudioManager.instance.MusicStop();
+        AudioManager.instance.AmbientStop();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif

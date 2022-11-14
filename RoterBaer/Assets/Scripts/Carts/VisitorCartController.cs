@@ -89,7 +89,7 @@ public class VisitorCartController : MonoBehaviour
     }
 }
 
-
+#if UNITY_EDITOR
 /// <summary>
 /// provides Button to clear all stored data
 /// </summary>
@@ -106,3 +106,4 @@ public class VisitorCartControllerEditor : UnityEditor.Editor
         base.OnInspectorGUI();
     }
 }
+#endif

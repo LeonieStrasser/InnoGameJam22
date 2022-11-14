@@ -118,6 +118,7 @@ public class TrackGate : TrackPoint
     }
 }
 
+#if UNITY_EDITOR
 /// <summary>
 /// provides Button to clear all stored data
 /// </summary>
@@ -125,3 +126,4 @@ public class TrackGate : TrackPoint
 public class TrackGateEditor : TrackPointEditor
 {
 }
+#endif
