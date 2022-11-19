@@ -21,8 +21,8 @@ public class HighscoreCounter : MonoBehaviour
     bool highscoreSaved;
 
     int currentHighscore = 0;
-
-    public int Highscore
+    int shownHighscoreValue;
+    int Highscore
     {
         get => currentHighscore;
         set
@@ -30,26 +30,31 @@ public class HighscoreCounter : MonoBehaviour
             currentHighscore = value;
             if (currentHighscore > bestHighscore)
                 BestHighscore = currentHighscore;
-            highscoreText.text = currentHighscore.ToString();
+
+            if (currentHighscore != shownHighscoreValue)
+                UpdateHighScoreTexts();
         }
     }
 
     int bestHighscore = 0;
-    public int BestHighscore
+    int shownBestHighscoreValue;
+    int BestHighscore
     {
         get => bestHighscore;
         set
         {
             bestHighscore = value;
-            bestScoreText.text = bestHighscore.ToString();
-            bestScoreText.enabled = (bestHighscore != 0);
+
+            if (bestHighscore != shownHighscoreValue)
+                UpdateHighScoreTexts();
         }
     }
+
+    Coroutine highscoreVisualCoroutine;
 
     [SerializeField] TMPro.TMP_Text highscoreText;
     [SerializeField] TMPro.TMP_Text bestScoreText;
     [SerializeField] TMPro.TMP_Text timer;
-
 
     float biggerTextSize;
     float smallerTextSize;
@@ -65,18 +70,26 @@ public class HighscoreCounter : MonoBehaviour
     {
         Active = this;
 
-        // to initialise text field
-        Highscore = currentHighscore;
-
-        if (PlayerPrefs.HasKey(GetPlayerPrefabKey(highscoreLevelID, 1)))
-            BestHighscore = PlayerPrefs.GetInt(GetPlayerPrefabKey(highscoreLevelID, 1));
-        else
-            BestHighscore = currentHighscore;
-
         if (roundLengthSeconds <= 0)
             enabled = false;
         else
             remainingTime = roundLengthSeconds;
+
+        SetupHighscores();
+    }
+
+    private void SetupHighscores()
+    {
+        // setting the visuals first, to avoid unnessesary calls of the UpCounter
+        SetHighscoreVisual(currentHighscore);
+        Highscore = shownHighscoreValue;
+
+        if (PlayerPrefs.HasKey(GetPlayerPrefabKey(highscoreLevelID, 1)))
+            SetBestHighscoreVisual(PlayerPrefs.GetInt(GetPlayerPrefabKey(highscoreLevelID, 1)));
+        else
+            SetBestHighscoreVisual(currentHighscore);
+
+        BestHighscore = shownBestHighscoreValue;
     }
 
     private void OnDestroy()
@@ -145,6 +158,51 @@ public class HighscoreCounter : MonoBehaviour
         runningRoundScoreCanvas.enabled = false;
         highscoreList.SetupHighscore(highscoreLevelID, currentHighscore);
     }
+
+    #region Update Score Texts
+    [ContextMenu("UpdateText")]
+    private void UpdateHighScoreTexts()
+    {
+        if (highscoreVisualCoroutine != null)
+            StopCoroutine(highscoreVisualCoroutine);
+
+        highscoreVisualCoroutine = StartCoroutine(HighscoreVisualCoroutine());
+    }
+
+    private IEnumerator HighscoreVisualCoroutine()
+    {
+        int biggestDifference = Mathf.Max(Mathf.Abs(shownHighscoreValue - Highscore), Mathf.Abs(shownBestHighscoreValue - BestHighscore));
+
+        while (shownHighscoreValue != Highscore || shownBestHighscoreValue != BestHighscore)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            if (shownHighscoreValue < Highscore)
+                SetHighscoreVisual(shownHighscoreValue + 1);
+            else if (shownHighscoreValue > Highscore)
+                SetHighscoreVisual(shownHighscoreValue - 1);
+
+            if (shownBestHighscoreValue < BestHighscore)
+                SetBestHighscoreVisual(shownBestHighscoreValue + 1);
+        }
+
+        highscoreVisualCoroutine = null;
+    }
+
+    private void SetHighscoreVisual(int value)
+    {
+        highscoreText.text = value.ToString();
+        shownHighscoreValue = value;
+    }
+
+    private void SetBestHighscoreVisual(int value)
+    {
+        bestScoreText.text = value.ToString();
+        bestScoreText.enabled = (value != 0);
+
+        shownBestHighscoreValue = value;
+    }
+    #endregion Update Score Texts
 
     #region Saving Highscore
     private static string GetPlayerPrefabKey(int levelID, int rank) => string.Format(PREFAB_HIGHSCORE, levelID, rank);
