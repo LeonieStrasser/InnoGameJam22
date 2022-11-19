@@ -13,6 +13,8 @@ public class MonsterActivator : MonoBehaviour
 
     [Space(20)]
     [SerializeField] GameObject scareRangeVFX;
+    [Header("For StartMenu")]
+    [SerializeField] bool mutedIdle = false;
 
     public Vector3 Position => transform.position;
 
@@ -28,7 +30,8 @@ public class MonsterActivator : MonoBehaviour
         cartsInRange = new List<VisitorCart>();
         anim = GetComponentInChildren<Animator>();
 
-        AudioManager.instance.MonsterIdleInitialize(this);
+        if (!mutedIdle)
+            AudioManager.instance.MonsterIdleInitialize(this);
     }
     private void Start()
     {
@@ -37,7 +40,8 @@ public class MonsterActivator : MonoBehaviour
 
     private void OnDestroy()
     {
-        AudioManager.instance.MonsterIdleRetirement(this);
+        if (!mutedIdle)
+            AudioManager.instance.MonsterIdleRetirement(this);
     }
 
     private void OnTriggerEnter(Collider other)
